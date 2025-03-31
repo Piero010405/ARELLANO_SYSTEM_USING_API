@@ -8,7 +8,7 @@ const sessionOptions = {
   cookieOptions: { secure: process.env.NODE_ENV === "production" },
 };
 
-export async function GET() {
+export async function GET(req) {
   try {
     const res = NextResponse.json({});
     const session = await getIronSession({ request: req, response: res, sessionOptions });
