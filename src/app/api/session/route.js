@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getIronSession } from "iron-session";
 import jwt from "jsonwebtoken";
-import apiClient from "@/utils/axiosInstance"; // Cliente de API con autenticación
+// import apiClient from "@/utils/axiosInstance"; // Cliente de API con autenticación
 
 const sessionOptions = {
   password: process.env.SECRET_KEY,
