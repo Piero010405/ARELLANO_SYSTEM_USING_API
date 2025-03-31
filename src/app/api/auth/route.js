@@ -14,7 +14,7 @@ const sessionOptions = {
 
 export async function GET(req) {
   const res = NextResponse.json({});
-  const session = await getIronSession(req, res, sessionOptions);
+  const session = await getIronSession({ request: req, response: res, sessionOptions });
 
   if (!session.user || !session.accessToken) {
     return NextResponse.json({ user: null }, { status: 401 });
@@ -41,7 +41,7 @@ export async function POST(req) {
 
     const { accessToken, user } = data;
     const res = NextResponse.json({ success: true, user });
-    const session = await getIronSession(req, res, sessionOptions);
+    const session = await getIronSession({ request: req, response: res, sessionOptions });
 
     session.accessToken = accessToken; // Guardar accessToken en sesión
     await session.save();
@@ -55,7 +55,7 @@ export async function POST(req) {
 
 export async function DELETE(req) {
   const res = NextResponse.json({ success: true });
-  const session = await getIronSession(req, res, sessionOptions);
+  const session = await getIronSession({ request: req, response: res, sessionOptions });
   await session.destroy();
 
   return res;

@@ -11,7 +11,7 @@ const sessionOptions = {
 export async function GET() {
   try {
     const res = NextResponse.json({});
-    const session = await getIronSession(req, res, sessionOptions);
+    const session = await getIronSession({ request: req, response: res, sessionOptions });
     
     if (!session.user) {
       return NextResponse.json({ error: "No autenticado" }, { status: 401 });

@@ -14,7 +14,7 @@ const sessionOptions = {
 export async function GET(req) {
   try {
     const res = NextResponse.json({});
-    const session = await getIronSession(req, res, sessionOptions);
+    const session = await getIronSession({ request: req, response: res, sessionOptions });
 
     // 🚨 Verifica si hay un accessToken en la sesión
     const accessToken = session.accessToken;

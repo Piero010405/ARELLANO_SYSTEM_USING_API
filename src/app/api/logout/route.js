@@ -14,7 +14,7 @@ const sessionOptions = {
 export async function POST(req) {
   try {
     const res = NextResponse.json({ success: true, message: "Sesión cerrada" }, { status: 200 });
-    const session = await getIronSession(req, res, sessionOptions);
+    const session = await getIronSession({ request: req, response: res, sessionOptions });
 
     if (!session.accessToken) {
       return NextResponse.json({ success: false, message: "No hay sesión activa" }, { status: 401 });

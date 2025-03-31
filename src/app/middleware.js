@@ -10,7 +10,7 @@ const sessionOptions = {
 
 export async function middleware(req) {
   const res = new Response();
-  const session = await getIronSession(req, res, sessionOptions);
+  const session = await getIronSession({ request: req, response: res, sessionOptions });
 
   if (!session.user && req.nextUrl.pathname.startsWith("/dashboard")) {
     return Response.redirect(new URL("/login", req.url));
