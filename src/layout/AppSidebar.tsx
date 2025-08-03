@@ -3,7 +3,7 @@ import { useEffect, useRef, useState,useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useSidebar } from "../context/SidebarContext";
+import { useSidebar } from "../context/sidebar/SidebarContext";
 import {
   // BoxCubeIcon,
   // CalenderIcon,

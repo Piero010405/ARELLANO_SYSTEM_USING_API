@@ -1,4 +1,4 @@
-import { useSidebar } from "@/context/SidebarContext";
+import { useSidebar } from "@/context/sidebar/SidebarContext";
 import React from "react";
 
 export default function Backdrop () {

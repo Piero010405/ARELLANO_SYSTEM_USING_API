@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 
-import { SidebarProvider } from "@/context/SidebarContext";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { SidebarProvider } from "@/context/sidebar/SidebarContext";
+import { ThemeProvider } from "@/context/theme/ThemeContext";
 
 const outfit = Outfit({
   variable: "--font-outfit-sans",
