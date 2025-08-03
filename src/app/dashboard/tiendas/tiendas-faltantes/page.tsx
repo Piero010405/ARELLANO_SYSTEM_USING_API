@@ -1,32 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
 
-import { User } from "@/lib/types/auth";
+import { useAuth } from '@/hooks/useAuth';
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
 import { withAuthProtection } from "@/hoc/withAuthProtection";
 
 function MisTiendasFaltantes() {
-  const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
-
-  const navigateToLogin = useCallback(() => {
-    router.push("/login");
-  }, [router]);
-
-  useEffect(() => {
-    const checkSession = async () => {
-      const res = await fetch("/api/session");
-      const data = await res.json();
-
-      if (!res.ok || !data.user) {
-        navigateToLogin();
-      } else {
-        setUser(data.user);
-      }
-    };
-    checkSession();
-  }, [navigateToLogin]);
+  const { user } = useAuth();
 
   if (!user) {
     return null;

@@ -1,40 +1,18 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
-
-import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
-import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 // import StatisticsChart from "@/components/ecommerce/StatisticsChart
 // import RecentOrders from "@/components/ecommerce/RecentOrders";
 // import DemographicCard from "@/components/ecommerce/DemographicCard";
 // import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 
-import { User } from "@/lib/types/auth";
+import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
+import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
 import StoresTable from "@/components/arellano/StoresTable";
 import { withAuthProtection } from "@/hoc/withAuthProtection";
+import { useAuth } from '@/hooks/useAuth';
 
 function DashboardPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
-
-  const navigateToLogin = useCallback(() => {
-    router.push("/login");
-  }, [router]);
-
-  useEffect(() => {
-    const checkSession = async () => {
-      const res = await fetch("/api/session");
-      const data = await res.json();
-
-      if (!res.ok || !data.user) {
-        navigateToLogin();
-      } else {
-        setUser(data.user);
-      }
-    };
-    checkSession();
-  }, [navigateToLogin]);
+  const { user } = useAuth();
 
   if (!user) {
     return null;

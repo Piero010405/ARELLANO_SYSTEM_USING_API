@@ -3,36 +3,15 @@ import UserAddressCard from "@/components/user-profile/UserAddressCard";
 import UserInfoCard from "@/components/user-profile/UserInfoCard";
 import UserMetaCard from "@/components/user-profile/UserMetaCard";
 import { withAuthProtection } from "@/hoc/withAuthProtection";
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { User } from "@/lib/types/auth";
+import { useAuth } from '@/hooks/useAuth';
 
 
 function Profile() {
-    const router = useRouter();
-      const [user, setUser] = useState<User | null>(null);
+    const { user } = useAuth();
     
-      const navigateToLogin = useCallback(() => {
-        router.push("/login");
-      }, [router]);
-    
-      useEffect(() => {
-        const checkSession = async () => {
-          const res = await fetch("/api/session");
-          const data = await res.json();
-    
-          if (!res.ok || !data.user) {
-            navigateToLogin();
-          } else {
-            setUser(data.user);
-          }
-        };
-        checkSession();
-      }, [navigateToLogin]);
-    
-      if (!user) {
-        return null;
-      }
+    if (!user) {
+      return null;
+    }
 
     return (
         <div>
