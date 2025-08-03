@@ -1,36 +1,16 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useCallback} from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { useRouter } from "next/navigation";
-import { User } from "@/lib/types/auth";
+import { useState } from "react";
+import { useAuth } from '@/hooks/useAuth';
 import { logout } from "@/lib/utils/logout";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const router = useRouter();
-    const [user, setUser] = useState<User | null>(null);
-  
-  const navigateToLogin = useCallback(() => {
-    router.push("/login");
-  }, [router]);
-  
-  useEffect(() => {
-    const checkSession = async () => {
-      const res = await fetch("/api/session");
-      const data = await res.json();
-  
-      if (!res.ok || !data.user) {
-        navigateToLogin();
-      } else {
-        setUser(data.user);
-      }
-    };
-    checkSession();
-  }, [navigateToLogin]);
+  const { user } = useAuth();
   
   if (!user) {
     return null;
