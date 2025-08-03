@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 
-import { User } from "@/interfaces/user";
+import { User } from "@/lib/types/auth";
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
 
 export default function MisTiendasFaltantes() {

@@ -5,8 +5,8 @@ import { useState, useEffect, useCallback} from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { useRouter } from "next/navigation";
-import { User } from "@/interfaces/user";
-import { logout } from "@/utils/logout";
+import { User } from "@/lib/types/auth";
+import { logout } from "@/lib/utils/logout";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);

@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { Metrics } from "@/interfaces/metrics";
+import { Metrics } from "@/lib/types/global";
 
 export default function NotificationDropdown() {
   const [isOpen, setIsOpen] = useState(false);

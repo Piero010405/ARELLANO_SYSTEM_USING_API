@@ -1,3 +1,29 @@
+// lib/types/global.ts
+export interface ApiResponse<T = unknown> {
+  data: T;
+  message?: string;
+  success: boolean;
+}
+
+export interface PaginatedResponse<T> extends ApiResponse<T[]> {
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+// lib/types/api.ts
+export interface Metrics {
+    notaudited: number;
+    cancelled: number;
+    fueraDT: number;
+    fullAudit: number;
+    tiendasFaltantes: number;
+    totalTiendas: number;
+}
+
 export interface Store {
     PERIOD: string;
     CODIGO: number;
@@ -24,5 +50,4 @@ export interface Store {
     COMENTARIO_DT: string;
     NOMBRE_TIENDA: string;
     MES_CONTRATO: string;
-  }
-  
+}

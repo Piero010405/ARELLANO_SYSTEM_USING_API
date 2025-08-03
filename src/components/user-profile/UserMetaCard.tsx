@@ -6,7 +6,7 @@ import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
 import Image from "next/image";
-import { User } from "@/interfaces/user";
+import { User } from "@/lib/types/auth";
 
 
 export default function UserMetaCard({ user }: { user: User }) {

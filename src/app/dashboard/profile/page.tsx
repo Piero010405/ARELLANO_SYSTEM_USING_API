@@ -4,7 +4,7 @@ import UserInfoCard from "@/components/user-profile/UserInfoCard";
 import UserMetaCard from "@/components/user-profile/UserMetaCard";
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { User } from "@/interfaces/user";
+import { User } from "@/lib/types/auth";
 
 
 export default function Profile() {

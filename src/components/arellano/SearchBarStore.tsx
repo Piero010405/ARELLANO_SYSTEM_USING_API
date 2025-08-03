@@ -1,6 +1,6 @@
 "use client";
 import Send from "@/icons/send";
-import { Store } from "@/interfaces/store";
+import { Store } from "@/lib/types/global";
 
 interface SearchBarStoreProps {
   onSearch: (storeData: Store | null) => void;

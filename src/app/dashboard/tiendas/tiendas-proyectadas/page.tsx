@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 
-import { User } from "@/interfaces/user";
+import { User } from "@/lib/types/auth";
 import StoresTableProyectadas from "@/components/arellano/StoresTableProyectadas";
 
 export default function TodasMisTiendas() {

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Store } from "@/interfaces/store";
+import { Store } from "@/lib/types/global";
 import BtnEditProyeccion from "./BtnEditProyeccion";
 import SearchBar from "./SearchBar";
 import ModalEditStore from "./ModalEditStore";
