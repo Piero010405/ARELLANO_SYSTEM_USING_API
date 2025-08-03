@@ -4,8 +4,9 @@ import { useEffect, useState, useCallback } from "react";
 
 import { User } from "@/lib/types/auth";
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
+import { withAuthProtection } from "@/hoc/withAuthProtection";
 
-export default function MisTiendasFaltantes() {
+function MisTiendasFaltantes() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
@@ -45,3 +46,5 @@ export default function MisTiendasFaltantes() {
     </>
   )
 }
+
+export default withAuthProtection(MisTiendasFaltantes);

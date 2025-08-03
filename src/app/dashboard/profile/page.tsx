@@ -2,12 +2,13 @@
 import UserAddressCard from "@/components/user-profile/UserAddressCard";
 import UserInfoCard from "@/components/user-profile/UserInfoCard";
 import UserMetaCard from "@/components/user-profile/UserMetaCard";
+import { withAuthProtection } from "@/hoc/withAuthProtection";
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/types/auth";
 
 
-export default function Profile() {
+function Profile() {
     const router = useRouter();
       const [user, setUser] = useState<User | null>(null);
     
@@ -48,3 +49,5 @@ export default function Profile() {
         </div>
     );
 }
+
+export default withAuthProtection(Profile);

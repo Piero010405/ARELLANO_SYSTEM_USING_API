@@ -2,18 +2,19 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 
-// import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 // import StatisticsChart from "@/components/ecommerce/StatisticsChart
 // import RecentOrders from "@/components/ecommerce/RecentOrders";
 // import DemographicCard from "@/components/ecommerce/DemographicCard";
+// import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 
 import { User } from "@/lib/types/auth";
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
 import StoresTable from "@/components/arellano/StoresTable";
+import { withAuthProtection } from "@/hoc/withAuthProtection";
 
-export default function DashboardPage() {
+function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
@@ -73,3 +74,5 @@ export default function DashboardPage() {
     </>
   )
 }
+
+export default withAuthProtection(DashboardPage);

@@ -4,8 +4,9 @@ import { useEffect, useState, useCallback } from "react";
 
 import { User } from "@/lib/types/auth";
 import StoresTableProyectadas from "@/components/arellano/StoresTableProyectadas";
+import { withAuthProtection } from "@/hoc/withAuthProtection";
 
-export default function TodasMisTiendas() {
+function TodasMisTiendas() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
@@ -45,3 +46,5 @@ export default function TodasMisTiendas() {
     </>
   )
 }
+
+export default withAuthProtection(TodasMisTiendas);

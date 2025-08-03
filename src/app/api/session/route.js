@@ -28,14 +28,6 @@ export async function GET(req) {
       return NextResponse.json({ user: null }, { status: 401 });
     }
 
-    // 🛠 Opcional: Validar si el accessToken sigue siendo válido en el backend
-    // try {
-    //   await apiClient.get("/api/auth/validate"); // Llamada a la API de validación en el backend
-    // } catch (error) {
-    //   console.log("Error al validar el accessToken en el backend:", error);
-    //   return NextResponse.json({ user: null }, { status: 401 });
-    // }
-
     return NextResponse.json({ user: decoded }, { status: 200 });
   } catch (error) {
     console.error("Error en GET /api/auth/session:", error);
