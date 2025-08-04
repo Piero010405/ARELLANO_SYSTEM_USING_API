@@ -26,7 +26,7 @@ export default function StoresTablesProyectadas() {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const res = await fetch("/api/stores_proyectadas");
+        const res = await fetch("/api/stores/stores_proyectadas");
         if (!res.ok) throw new Error("Error al obtener los datos");
           
         const data = await res.json();
