@@ -39,10 +39,39 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const response = await authService.login({ email, password });
-      if (response.user) {
-        setUser(response.user);
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Error de login");
       }
+
+      // Esperar a que iron-session esté lista
+      const res = await fetch("/api/auth/validate", {
+        credentials: "include",
+      });
+      const text = await res.text();
+      console.log("validate response text:", text);
+
+      let dataValidate;
+      try {
+        dataValidate = JSON.parse(text);
+      } catch (err) {
+        console.error("Error al parsear la respuesta:", err);
+        console.error("No se pudo parsear la respuesta:", text);
+        throw new Error("Respuesta inválida del backend");
+      }
+
+      if (res.ok && dataValidate.user) {
+        setUser(dataValidate.user);
+      }
+
     } catch (error) {
       throw error;
     } finally {

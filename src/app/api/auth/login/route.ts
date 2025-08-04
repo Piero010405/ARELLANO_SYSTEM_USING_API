@@ -14,10 +14,13 @@ export async function POST(req: NextRequest) {
 
     const res = NextResponse.json({ success: true, user });
     const session = await getIronSession<SessionData>(req, res, sessionOptions);
+
+    console.log("session", session);
+
     session.accessToken = accessToken;
     session.user = user;
     await session.save();
-
+    
     return res;
   } catch (error: any) {
     console.error("Login error:", error?.response?.data || error.message);

@@ -26,6 +26,8 @@ export default function SignInForm() {
       body: JSON.stringify({ email, password })
     });
 
+    console.log(res);
+
     if (res.ok) {
       router.push("/dashboard");
     } else {
