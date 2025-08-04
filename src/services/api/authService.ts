@@ -9,18 +9,31 @@ export const authService = {
         return response.data;
     },
 
-    async logout(): Promise<void> {
-        await axiosBackend.post(API_ENDPOINTS.AUTH.LOGOUT);
+    async logout(accessToken?: string): Promise<void> {
+        await axiosBackend.post(API_ENDPOINTS.AUTH.LOGOUT, {
+            headers: {
+                ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+            },
+        });
     },
 
-    async refreshToken(): Promise<{ accessToken: string }> {
-        const response = await axiosBackend.get(API_ENDPOINTS.AUTH.REFRESH);
+    async refreshToken(accessToken?: string): Promise<{ accessToken: string }> {
+        const response = await axiosBackend.get(API_ENDPOINTS.AUTH.REFRESH, {
+            headers: {
+                ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+            },
+        });
         return response.data;
     },
 
-    async validateSession(): Promise<{ user: AuthResponse["user"] } | null> {
+    async validateSession(accessToken?: string): Promise<{ user: AuthResponse["user"] } | null> {
         try {
-            const res = await axiosBackend.get(API_ENDPOINTS.AUTH.VALIDATE);
+            const res = await axiosBackend.get(API_ENDPOINTS.AUTH.VALIDATE, {
+                headers: {
+                    ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+                },
+            });
+            
             if (res.status === 200 && res.data.user) {
                 return { user: res.data.user };
             }

@@ -1,3 +1,4 @@
+// src/app/api/auth/proyecciones/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
 import { proyeccionesService } from "@/services";

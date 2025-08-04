@@ -4,23 +4,39 @@ import { Store } from "@/lib/types/global";
 import { API_ENDPOINTS } from "@/lib/api/endpoints";
 
 export const storesService = {
-  async getStores(): Promise<Store[]> {
-    const response = await axiosBackend.get(API_ENDPOINTS.STORES.BASE);
+  async getStores(accessToken?: string): Promise<Store[]> {
+    const response = await axiosBackend.get(API_ENDPOINTS.STORES.BASE, {
+      headers: {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+    });
     return response.data;
   },
 
-  async getStoreById(codigo: string): Promise<Store> {
-    const response = await axiosBackend.get(API_ENDPOINTS.STORES.BY_ID(codigo));
+  async getStoreById(codigo: string, accessToken?: string): Promise<Store> {
+    const response = await axiosBackend.get(API_ENDPOINTS.STORES.BY_ID(codigo), {
+      headers: {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+    });
     return response.data;
   },
 
-  async getStoresFaltantes(): Promise<Store[]> {
-    const response = await axiosBackend.get(API_ENDPOINTS.STORES.FALTANTES);
+  async getStoresFaltantes(accessToken?: string): Promise<Store[]> {
+    const response = await axiosBackend.get(API_ENDPOINTS.STORES.FALTANTES, {
+      headers: {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+    });
     return response.data;
   },
 
-  async getStoresProyectadas(): Promise<Store[]> {
-    const response = await axiosBackend.get(API_ENDPOINTS.STORES.PROYECTADAS);
+  async getStoresProyectadas(accessToken?: string): Promise<Store[]> {
+    const response = await axiosBackend.get(API_ENDPOINTS.STORES.PROYECTADAS, {
+      headers: {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+    });
     return response.data;
   },
 };

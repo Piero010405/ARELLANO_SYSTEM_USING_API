@@ -1,11 +1,12 @@
+// src/app/api/auth/metricas/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
 import { metricasService } from "@/services";
 
 export async function GET(req: NextRequest) {
   try {
-    await requireSession(req);
-    const data = await metricasService.getMetrics();
+    const { session } = await requireSession(req);
+    const data = await metricasService.getMetrics(session.accessToken);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error al obtener métricas:", error);

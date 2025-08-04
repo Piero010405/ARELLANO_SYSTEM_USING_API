@@ -4,8 +4,12 @@ import { API_ENDPOINTS } from "@/lib/api/endpoints";
 import type { ApiResponse } from "@/lib/types/global";
 
 export const proyeccionesService = {
-  async postProyeccion(payload: Record<string, unknown>): Promise<ApiResponse> {
-    const response = await axiosBackend.post(API_ENDPOINTS.PROYECCIONES, payload);
+  async postProyeccion(payload: Record<string, unknown>, accessToken?: string): Promise<ApiResponse> {
+    const response = await axiosBackend.post(API_ENDPOINTS.PROYECCIONES, payload, {
+      headers: {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+    });
     return response.data;
   },
 };

@@ -1,3 +1,4 @@
+// src/app/api/auth/sotores/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
 import { storesService } from "@/services";

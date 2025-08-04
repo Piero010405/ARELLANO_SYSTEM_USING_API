@@ -4,8 +4,12 @@ import { Metrics } from "@/lib/types/global";
 import { API_ENDPOINTS } from "@/lib/api/endpoints";
 
 export const metricasService = {
-  async getMetrics(): Promise<Metrics> {
-    const response = await axiosBackend.get(API_ENDPOINTS.METRICAS);
-  return response.data;
+  async getMetrics(accessToken?: string): Promise<Metrics> {
+    const response = await axiosBackend.get(API_ENDPOINTS.METRICAS, {
+      headers: {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+    });
+    return response.data;
   },
 };

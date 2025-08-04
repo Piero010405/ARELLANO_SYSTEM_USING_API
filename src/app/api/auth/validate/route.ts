@@ -1,3 +1,4 @@
+// src/app/api/auth/validate/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
 import { authService } from "@/services";
