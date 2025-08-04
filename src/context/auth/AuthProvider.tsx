@@ -20,9 +20,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const validateSession = async () => {
     try {
-      const result = await authService.validateSession();
-      if (result?.user) {
-        setUser(result.user);
+      const res = await fetch("/api/auth/validate", {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+
+      if (res.ok && data.user) {
+        setUser(data.user);
       }
     } catch (error) {
       console.warn("No active session", error);
