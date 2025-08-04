@@ -24,8 +24,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         credentials: "include",
       });
       const data = await res.json();
-
-      console.log("Frontend: respuesta de /validate:", data);
       
       if (res.ok && data.user) {
         setUser(data.user);
