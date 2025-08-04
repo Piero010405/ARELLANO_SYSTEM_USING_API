@@ -5,8 +5,8 @@ import { storesService } from "@/services";
 
 export async function GET(req: NextRequest, { params }: { params: { codigo: string } }) {
   try {
-    await requireSession(req);
-    const store = await storesService.getStoreById(params.codigo);
+    const { session } = await requireSession(req);
+    const store = await storesService.getStoreById(params.codigo, session.accessToken);
     return NextResponse.json(store);
   } catch (error) {
     console.error("Error al obtener tienda:", error);

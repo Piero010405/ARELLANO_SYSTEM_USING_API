@@ -5,8 +5,8 @@ import { storesService } from "@/services";
 
 export async function GET(req: NextRequest) {
   try {
-    await requireSession(req);
-    const data = await storesService.getStoresProyectadas();
+    const { session } = await requireSession(req);
+    const data = await storesService.getStoresProyectadas(session.accessToken);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error al obtener tiendas proyectadas:", error);

@@ -5,9 +5,9 @@ import { proyeccionesService } from "@/services";
 
 export async function POST(req: NextRequest) {
   try {
-    await requireSession(req);
+    const { session } = await requireSession(req);
     const body = await req.json();
-    const result = await proyeccionesService.postProyeccion(body);
+    const result = await proyeccionesService.postProyeccion(body, session.accessToken);
     return NextResponse.json(result);
   } catch (error) {
     console.error("Error al registrar proyección:", error);

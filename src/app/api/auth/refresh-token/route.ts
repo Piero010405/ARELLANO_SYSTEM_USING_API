@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, message: "No hay sesión activa" }, { status: 401 });
   }
   try {
-    const { accessToken } = await authService.refreshToken();
+    const { accessToken } = await authService.refreshToken(session.accessToken);
     return NextResponse.json({ accessToken });
   } catch (error) {
     console.error("Error al refrescar token:", error);

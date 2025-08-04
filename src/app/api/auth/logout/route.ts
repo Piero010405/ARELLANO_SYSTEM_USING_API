@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await authService.logout(); // Hace POST a /api/auth/logout (backend)
+    await authService.logout(session.accessToken); // Hace POST a /api/auth/logout (backend)
     await session.destroy();
     return res;
   } catch (error) {
