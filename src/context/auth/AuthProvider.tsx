@@ -20,13 +20,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const validateSession = async () => {
     try {
-      const valid = await authService.validateSession();
-      if (valid) {
-        const accessToken = localStorage.getItem("accessToken");
-        if (accessToken) {
-          // Puedes también hacer un endpoint tipo `/api/auth/me` para devolver `User`
-          // setUser(await authService.getProfile());
-        }
+      const result = await authService.validateSession();
+      if (result?.user) {
+        setUser(result.user);
       }
     } catch (error) {
       console.warn("No active session", error);
@@ -38,11 +34,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await authService.login({ email, password });
-      localStorage.setItem("accessToken", res.accessToken);
-      setUser(res.user);
-    } catch (err) {
-      throw err;
+      const response = await authService.login({ email, password });
+      if (response.user) {
+        setUser(response.user);
+      }
+    } catch (error) {
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -54,7 +51,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
-      localStorage.removeItem("accessToken");
       setUser(null);
     }
   };
@@ -67,5 +63,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isAuthenticated: !!user,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

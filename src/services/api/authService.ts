@@ -18,12 +18,15 @@ export const authService = {
         return response.data;
     },
 
-    async validateSession(): Promise<boolean> {
+    async validateSession(): Promise<{ user: AuthResponse["user"] } | null> {
         try {
             const res = await axiosBackend.get(API_ENDPOINTS.AUTH.VALIDATE);
-            return res.status === 200;
+            if (res.status === 200 && res.data.user) {
+                return { user: res.data.user };
+            }
+            return null;
         } catch {
-            return false;
+            return null;
         }
     },
 };
