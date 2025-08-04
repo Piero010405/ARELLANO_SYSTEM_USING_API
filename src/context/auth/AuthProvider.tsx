@@ -82,9 +82,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       const response = await fetch("/api/auth/logout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({}),
       });
 
       const data = await response.json();

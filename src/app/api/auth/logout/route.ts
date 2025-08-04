@@ -13,20 +13,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, message: "No hay sesión activa" }, { status: 401 });
   }
 
+  const accessToken = session.accessToken;
+
   try {
-    const accessToken = session.accessToken;
-
-    // ✅ Extraer refreshToken desde las cookies
-    const refreshToken = req.cookies.get("refreshToken")?.value;
-
-    console.log("refreshToken:", refreshToken);
-    console.log("req.cookies:", req.cookies);
-    
-    // ✅ Enviar accessToken y refreshToken como headers personalizados
-    if (accessToken && refreshToken) {
-      await authService.logout(accessToken, refreshToken);
+    // ✅ Enviar accessToken como header personalizados
+    if (accessToken) {
+       await authService.logout(accessToken);
     }
-
+    
     await session.destroy();
     return res;
   } catch (error) {
