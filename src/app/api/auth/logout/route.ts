@@ -17,12 +17,7 @@ export async function POST(req: NextRequest) {
     const accessToken = session.accessToken;
 
     // ✅ Extraer refreshToken desde las cookies
-    const cookieHeader = req.headers.get("cookie") || "";
-    const cookies = Object.fromEntries(cookieHeader.split(";").map(cookie => {
-      const [key, ...val] = cookie.trim().split("=");
-      return [key, val.join("=")];
-    }));
-    const refreshToken = cookies["refreshToken"];
+    const refreshToken = req.cookies.get("refreshToken")?.value;
     
     // ✅ Enviar accessToken y refreshToken como headers personalizados
     if (accessToken && refreshToken) {
