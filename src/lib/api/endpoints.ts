@@ -10,8 +10,8 @@ export const API_ENDPOINTS = {
   PROYECCIONES: '/api/proyecciones',
   STORES: {
     BASE: '/api/stores',
-    FALTANTES: '/api/stores/stores_faltantes',
-    PROYECTADAS: '/api/stores/stores_proyectadas',
+    FALTANTES: '/api/stores/stores-faltantes',
+    PROYECTADAS: '/api/stores/stores-proyectadas',
     BY_ID: (id: string) => `/api/stores/${id}`,
   },
 } as const;
