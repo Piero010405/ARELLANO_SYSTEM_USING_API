@@ -3,17 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import axiosBackend from "@/lib/api/client";
 import { getIronSession } from "iron-session";
 import { SessionData } from "@/lib/auth/session";
-
-const sessionOptions = {
-  password: process.env.SECRET_KEY!,
-  cookieName: "auth_session",
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-    httpOnly: true,
-    sameSite: "Strict",
-    path: "/",
-  },
-};
+import { sessionOptions } from "@/lib/auth/config";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export async function POST(req: NextRequest) {
