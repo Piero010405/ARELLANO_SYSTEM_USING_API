@@ -1,4 +1,4 @@
-import { logout } from "@/utils/logout";
+import { logout } from "@/lib/utils/logout";
 
 export default function SidebarWidget() {
   return (
