@@ -3,7 +3,6 @@
 
 import { useState, useEffect, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
-import { authService } from "@/services";
 import { User } from "@/lib/types/auth";
 
 interface AuthProviderProps {
@@ -26,6 +25,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       });
       const data = await res.json();
 
+      console.log("Frontend: respuesta de /validate:", data);
+      
       if (res.ok && data.user) {
         setUser(data.user);
       }
@@ -81,11 +82,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async () => {
     try {
-      await authService.logout();
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({}),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Error de logout");
+      }
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
       setUser(null);
+      window.location.href = "/login";
     }
   };
 

@@ -5,12 +5,11 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { useState } from "react";
 import { useAuth } from '@/hooks/useAuth';
-import { logout } from "@/lib/utils/logout";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   
   if (!user) {
     return null;

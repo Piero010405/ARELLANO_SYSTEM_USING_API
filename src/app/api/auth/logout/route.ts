@@ -14,7 +14,13 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await authService.logout(session.accessToken); // Hace POST a /api/auth/logout (backend)
+    const accessToken = session.accessToken;
+
+    // Opcional: cerrar sesión en el backend
+    if (accessToken) {
+      await authService.logout(accessToken);
+    }
+    
     await session.destroy();
     return res;
   } catch (error) {

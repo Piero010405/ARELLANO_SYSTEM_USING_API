@@ -15,8 +15,10 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.json({ success: true, user });
     const session = await getIronSession<SessionData>(req, res, sessionOptions);
 
-    console.log("session", session);
+    // ⚠️ BORRA lo que exista antes
+    await session.destroy();
 
+    // ⚠️ Luego reestablece la sesión
     session.accessToken = accessToken;
     session.user = user;
     await session.save();

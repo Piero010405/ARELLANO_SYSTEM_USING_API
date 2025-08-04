@@ -1,6 +1,7 @@
-import { logout } from "@/lib/utils/logout";
+import { useAuth } from '@/hooks/useAuth';
 
 export default function SidebarWidget() {
+  const { logout } = useAuth();
   return (
     <div
       className={`

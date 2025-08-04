@@ -7,6 +7,7 @@ export const sessionOptions = {
     sameSite: "Strict",
     path: "/",
     httpOnly: true,
+    maxAge: 60 * 60 * 24, // 1 día
   },
 };
 
@@ -17,6 +18,7 @@ export const sessionOptionsRoute = {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     sameSite: "Strict",
+    maxAge: 60 * 60 * 24, // 1 día
   },
 };
 

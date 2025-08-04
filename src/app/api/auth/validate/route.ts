@@ -6,6 +6,7 @@ import { authService } from "@/services";
 export async function GET(req: NextRequest) {
   try {
     const { session } = await requireSession(req);
+    
     const result = await authService.validateSession(session.accessToken);
     if (!result?.user) {
       return NextResponse.json({ error: "Sesión inválida" }, { status: 401 });
