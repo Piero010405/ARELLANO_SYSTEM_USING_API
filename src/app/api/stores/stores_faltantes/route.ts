@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
-import { metricasService } from "@/services";
+import { storesService } from "@/services";
 
 export async function GET(req: NextRequest) {
   try {
     await requireSession(req);
-    const data = await metricasService.getMetrics();
+    const data = await storesService.getStoresFaltantes();
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error al obtener métricas:", error);
-    return new NextResponse("Error al obtener métricas", { status: 500 });
+    console.error("Error al obtener tiendas faltantes:", error);
+    return new NextResponse("Error interno", { status: 500 });
   }
 }
