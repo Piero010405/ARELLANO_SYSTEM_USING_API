@@ -16,11 +16,19 @@ export async function POST(req: NextRequest) {
   try {
     const accessToken = session.accessToken;
 
-    // Opcional: cerrar sesión en el backend
-    if (accessToken) {
-      await authService.logout(accessToken);
-    }
+    // ✅ Extraer refreshToken desde las cookies
+    const cookieHeader = req.headers.get("cookie") || "";
+    const cookies = Object.fromEntries(cookieHeader.split(";").map(cookie => {
+      const [key, ...val] = cookie.trim().split("=");
+      return [key, val.join("=")];
+    }));
+    const refreshToken = cookies["refreshToken"];
     
+    // ✅ Enviar accessToken y refreshToken como headers personalizados
+    if (accessToken && refreshToken) {
+      await authService.logout(accessToken, refreshToken);
+    }
+
     await session.destroy();
     return res;
   } catch (error) {

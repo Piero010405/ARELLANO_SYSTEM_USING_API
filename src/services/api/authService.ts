@@ -9,12 +9,18 @@ export const authService = {
         return response.data;
     },
 
-    async logout(accessToken?: string): Promise<void> {
-        await axiosBackend.post(API_ENDPOINTS.AUTH.LOGOUT, null, {
-            headers: {
-                ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-            },
-        });
+    async logout(accessToken?: string, refreshToken?: string): Promise<void> {
+        await axiosBackend.post(
+            API_ENDPOINTS.AUTH.LOGOUT,
+            {}, // ← usa `{}` en lugar de `null` para evitar errores de payload
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    Cookie: `refreshToken=${refreshToken}`, // 👈 reenviamos cookie manualmente
+                },
+                withCredentials: true,
+            }
+        );
     },
 
     async refreshToken(accessToken?: string): Promise<{ accessToken: string }> {
