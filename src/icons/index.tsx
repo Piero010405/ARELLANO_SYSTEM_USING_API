@@ -1,3 +1,4 @@
+import ArellanoLogo from "./arelllano-logo";
 import PlusIcon from "./plus";
 import CloseIcon from "./close";
 import BoxIcon from "./box";
@@ -57,6 +58,7 @@ import Send from "./send";
 import Reset from "./reset";
 
 export {
+  ArellanoLogo,
   DownloadIcon,
   BellIcon,
   MoreDotIcon,
