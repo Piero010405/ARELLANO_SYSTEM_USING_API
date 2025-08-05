@@ -4,8 +4,8 @@ import { Store } from "@/lib/types/global";
 import { API_ENDPOINTS } from "@/lib/api/endpoints";
 
 export const storesService = {
-  async getStores(accessToken?: string): Promise<Store[]> {
-    const response = await axiosBackend.get(API_ENDPOINTS.STORES.BASE, {
+  async getStores(accessToken?: string, pageSize = 10, offset = 0): Promise<{ stores: Store[]; total: number }> {
+    const response = await axiosBackend.get(`${API_ENDPOINTS.STORES.BASE}?pageSize=${pageSize}&offset=${offset}`, {
       headers: {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       },

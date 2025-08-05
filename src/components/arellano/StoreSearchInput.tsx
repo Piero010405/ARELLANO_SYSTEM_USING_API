@@ -17,7 +17,7 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
   // Fetch inicial para cargar todas las tiendas
   useEffect(() => {
     const fetchStores = async () => {
-        const res = await fetch(`/api/stores?pageSize=1000&offset=0`);
+        const res = await fetch(`/api/stores?pageSize=10000&offset=0`);
         const data = await res.json();
         console.log("API RESPONSE:", data);
         setStores(data.stores);

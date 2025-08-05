@@ -220,6 +220,9 @@ export default function StoresTablesFaltantes() {
           </div>
         </div>
       </div>
+      {!loading && stores.length === 0 && (
+        <div className="text-center text-sm text-gray-500 pt-3">No hay tiendas faltantes.</div>
+      )}
     </div>
      <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStore={selectedStore} />
     </>

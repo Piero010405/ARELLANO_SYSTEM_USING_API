@@ -56,8 +56,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         credentials: "include",
       });
       const text = await res.text();
-      console.log("validate response text:", text);
-
+      
       let dataValidate;
       try {
         dataValidate = JSON.parse(text);

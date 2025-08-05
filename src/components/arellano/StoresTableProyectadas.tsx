@@ -231,6 +231,9 @@ export default function StoresTablesProyectadas() {
           </div>
         </div>
       </div>
+      {!loading && stores.length === 0 && (
+        <div className="text-center text-sm text-gray-500 pt-3">No hay tiendas proyectadas.</div>
+      )}
     </div>
      <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStore={selectedStore} />
     </>
