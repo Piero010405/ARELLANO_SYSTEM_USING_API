@@ -2,14 +2,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
 import { storesService } from "@/services";
+import { getPaginationParams } from "@/app/lib/getPaginationParams";
 
 export async function GET(req: NextRequest) {
   try {
     const { session } = await requireSession(req);
 
-      // ✅ Leer parámetros de paginación desde la URL
-    const pageSize = parseInt(req.nextUrl.searchParams.get("pageSize") || "10");
-    const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0");
+    const { pageSize, offset } = getPaginationParams(req);
 
     const stores = await storesService.getStores(session.accessToken, pageSize, offset);
     
