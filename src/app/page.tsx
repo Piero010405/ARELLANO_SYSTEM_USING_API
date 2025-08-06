@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 import { LoginButton } from "@/components/arellano/LoginButton";
-import ArellanoLoader from "@/components/arellano/ArellanoLoader";
 
 function Home(){
   const headerRef = useRef<HTMLDivElement>(null);
