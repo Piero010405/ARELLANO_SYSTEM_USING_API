@@ -7,6 +7,16 @@
   --font-poppins: 'Poppins', sans-serif;
 }
 
+/* Colores para el modo claro (light mode) */
+:root {
+  --fill-color: #16263C;
+}
+
+/* Colores para el modo oscuro (dark mode) */
+body.dark-mode {
+  --fill-color: #FFFFFF; /* Blanco */
+}
+
 /* body {
   @apply bg-[var(--dark-bg)] text-white font-[var(--font-poppins)];
 } */

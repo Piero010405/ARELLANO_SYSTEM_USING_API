@@ -11,7 +11,7 @@ interface SearchBarStoreProps {
 export default function SearchBarStore({ onSearch, searchQuery, setSearchQuery  }: SearchBarStoreProps) {
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
-  
+    
     try {
       const res = await fetch(`/api/stores/${searchQuery}`);
       const data = await res.json();
