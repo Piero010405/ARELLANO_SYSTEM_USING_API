@@ -1,10 +1,11 @@
 // lib/types/auth.ts
 export interface User {
     id: Int16Array,
-    name: string,
+    admin: boolean,
     email: string,
+    name: string,
     photo: string,
-    admin: boolean
+    sessionId: string,
 }
 
 export interface LoginCredentials {

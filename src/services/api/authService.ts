@@ -12,7 +12,7 @@ export const authService = {
     async logout(accessToken?: string, refreshToken?: string): Promise<void> {
         await axiosBackend.post(
             API_ENDPOINTS.AUTH.LOGOUT,
-            {}, // ← usa `{}` en lugar de `null` para evitar errores de payload
+            {},
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
