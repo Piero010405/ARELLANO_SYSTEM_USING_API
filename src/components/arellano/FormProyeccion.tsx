@@ -49,6 +49,7 @@ const reasonOptions: Record<string, Record<string, string[]>> = {
         "COLABORADOR(A) SIN UBICAR": [],
         "ZONA PELIGROSA": [],
         "CIERRE POR REMODELACIÓN INTERNA/EXTERNA PROLONGADO": [],
+        "ANULACIÓN POR SOBREMUESTRA": [],
     },
     NOTAUDITED: {
         "COLABORADOR(A) SIN UBICAR": [],

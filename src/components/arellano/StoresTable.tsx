@@ -16,6 +16,7 @@ import SearchBarStore from "./SearchBarStore";
 import ResetButton from "./BtnReset";
 import { useModal } from "@/hooks/useModal";
 import ModalEditStore from "./ModalEditStore";
+import { useLoading } from "@/context/loading/LoadingContext";
 
 interface StoresTableProps {
   pageSize?: number;
@@ -32,6 +33,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
   const { isOpen, openModal, closeModal } = useModal();
+  const { show, hide } = useLoading();
 
   useEffect(() => {
     const fetchAllStores = async () => {
@@ -77,6 +79,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
 
   const handleEditClick = async (codigo: number) => {
     try {
+      show();
       const res = await fetch(`/api/stores/${codigo}`);
       const data = await res.json();
       if (!res.ok) throw new Error("Error al obtener los datos de la tienda");
@@ -85,6 +88,8 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
       openModal();
     } catch (error) {
       console.error("Error al cargar tienda:", error);
+    } finally {
+      hide();
     }
   };
 
