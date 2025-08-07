@@ -28,13 +28,11 @@ export default function SignInForm() {
       show();
       await login(email, password);
       router.replace("/dashboard");
-      console.log("REDIRECTED TO DASHBOARD");
     } catch (error) {
       console.error("Login error:", error);
       setError("Credenciales incorrectas");
     } finally {
       hide();
-      console.log("HIDE LOADING");
     }
   };
 

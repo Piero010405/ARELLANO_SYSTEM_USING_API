@@ -19,7 +19,6 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
     const fetchStores = async () => {
         const res = await fetch(`/api/stores?pageSize=10000&offset=0`);
         const data = await res.json();
-        console.log("API RESPONSE:", data);
         setStores(data.stores);
     };
     fetchStores();
@@ -29,7 +28,7 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
   useEffect(() => {
     if (query.length > 0) {
         const filtered = stores.filter((store) =>
-            store.CODIGO.toString().toLowerCase().startsWith(query.toLowerCase())
+          String(store.CODIGO).includes(query.toLowerCase())
         );
         setFilteredStores(filtered);
         setShowSuggestions(true);
