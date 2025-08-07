@@ -16,7 +16,7 @@ export const authService = {
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
-                    Cookie: `refreshToken=${refreshToken}`, // 👈 reenviamos cookie manualmente
+                    Cookie: `refreshToken=${refreshToken}`,
                 },
                 withCredentials: true,
             }
