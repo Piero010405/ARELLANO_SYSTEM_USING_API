@@ -1,5 +1,5 @@
 import * as React from "react";
-const SVGComponent = ({ fillColor = "#16263C", ...props }) => (
+const SVGComponent = ({ fillColor = "#FFFFFF", ...props }) => (
   <svg
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"

@@ -8,7 +8,6 @@ import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
 import StoresTable from "@/components/arellano/StoresTable";
-import { withAuthProtection } from "@/hoc/withAuthProtection";
 import { useAuth } from '@/hooks/useAuth';
 
 function DashboardPage() {
@@ -17,7 +16,7 @@ function DashboardPage() {
   if (!user) {
     return null;
   }
-
+  
   return (
     <>
       <div className="pb-5">
@@ -53,4 +52,4 @@ function DashboardPage() {
   )
 }
 
-export default withAuthProtection(DashboardPage);
+export default DashboardPage;

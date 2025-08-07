@@ -1,7 +1,6 @@
 "use client";
 import { useAuth } from '@/hooks/useAuth';
 import StoresTableProyectadas from "@/components/arellano/StoresTableProyectadas";
-import { withAuthProtection } from "@/hoc/withAuthProtection";
 
 function TodasMisTiendas() {
   const { user } = useAuth();
@@ -25,4 +24,4 @@ function TodasMisTiendas() {
   )
 }
 
-export default withAuthProtection(TodasMisTiendas);
+export default TodasMisTiendas;

@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import { useLoading } from "@/context/loading/LoadingContext";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,7 @@ export default function SignInForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);;
   const router = useRouter();
+  const { show, hide } = useLoading();
   const { login } = useAuth();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -23,11 +25,14 @@ export default function SignInForm() {
     setError(null);
 
     try {
+      show();
       await login(email, password);
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
       setError("Credenciales incorrectas");
+    } finally {
+      hide();
     }
   };
 

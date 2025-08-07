@@ -2,7 +2,6 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
-import { withAuthProtection } from "@/hoc/withAuthProtection";
 
 function MisTiendasFaltantes() {
   const { user } = useAuth();
@@ -26,4 +25,4 @@ function MisTiendasFaltantes() {
   )
 }
 
-export default withAuthProtection(MisTiendasFaltantes);
+export default MisTiendasFaltantes;

@@ -1,7 +1,6 @@
 "use client";
 import { useAuth } from '@/hooks/useAuth';
 import FormProyeccion from "@/components/arellano/FormProyeccion";
-import { withAuthProtection } from "@/hoc/withAuthProtection";
 
 function MisTiendasFaltantes() {
   const { user } = useAuth();
@@ -25,4 +24,4 @@ function MisTiendasFaltantes() {
   )
 }
 
-export default withAuthProtection(MisTiendasFaltantes);
+export default MisTiendasFaltantes;
