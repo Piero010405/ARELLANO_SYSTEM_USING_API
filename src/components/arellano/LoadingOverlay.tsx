@@ -5,7 +5,7 @@ import ArellanoLoader from "./ArellanoLoader";
 
 export default function LoadingOverlay() {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div className="fixed inset-0 z-99999 flex items-center justify-center bg-black/40 backdrop-blur-sm">
       <ArellanoLoader />
     </div>
   );

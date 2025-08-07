@@ -5,6 +5,7 @@ import BtnEditProyeccion from "./BtnEditProyeccion";
 import SearchBar from "./SearchBar";
 import ModalEditStore from "./ModalEditStore";
 import { useModal } from "@/hooks/useModal";
+import { useLoading } from "@/context/loading/LoadingContext";
 
 import {
     Table,
@@ -20,8 +21,9 @@ export default function StoresTablesFaltantes() {
   const [loading, setLoading] = useState(true);
   const [filteredStores, setFilteredStores] = useState<Store[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-    const [selectedStore, setSelectedStore] = useState<Store | null>(null);
-    const { isOpen, openModal, closeModal } = useModal();
+  const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+  const { isOpen, openModal, closeModal } = useModal();
+  const { show, hide } = useLoading();
   
   useEffect(() => {
     const fetchStores = async () => {
@@ -54,6 +56,7 @@ export default function StoresTablesFaltantes() {
 
   const handleEditClick = async (codigo: number) => {
     try {
+      show();
       const res = await fetch(`/api/stores/${codigo}`);
       const data = await res.json();
       if (!res.ok) throw new Error("Error al obtener los datos de la tienda");
@@ -62,6 +65,8 @@ export default function StoresTablesFaltantes() {
       openModal();
     } catch (error) {
       console.error("Error al cargar tienda:", error);
+    } finally {
+      hide();
     }
   };
 
