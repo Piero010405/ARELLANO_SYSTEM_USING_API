@@ -34,7 +34,7 @@ export default function MonthlyTarget() {
       const porcentajeCalculado = parseFloat(
         ((data.tiendasFaltantes / data.totalTiendas) * 100).toFixed(2)
       );
-      setPorcentaje([porcentajeCalculado]);
+      setPorcentaje([100 - porcentajeCalculado]);
     };
     fetchMetrics();
   }, []);
