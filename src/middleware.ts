@@ -4,18 +4,15 @@ import { sessionOptions } from "@/lib/auth/config";
 import type { SessionData } from "@/lib/auth/session";
 
 export async function middleware(req: NextRequest) {
-  const res = new NextResponse();
-  const session = await getIronSession<SessionData>(req, res, sessionOptions);
-
-  const isLoggedIn = !!session.user;
+  const session = await getIronSession<SessionData>(req, new NextResponse(), sessionOptions);
 
   const isProtectedRoute = req.nextUrl.pathname.startsWith("/dashboard");
 
-  if (isProtectedRoute && !isLoggedIn) {
+  if (isProtectedRoute && !session.user) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  return res;
+  return NextResponse.next();
 }
 
 export const config = {
