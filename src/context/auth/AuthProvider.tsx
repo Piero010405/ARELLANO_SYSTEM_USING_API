@@ -5,7 +5,6 @@ import { useState, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
 import LoadingOverlay from "@/components/arellano/LoadingOverlay";
 import { User } from "@/lib/types/auth";
-// import { useEffect } from "react";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -14,28 +13,6 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   validateSession();
-  // }, []);
-
-  //  const validateSession = async () => {
-  //   try {
-  //     const res = await fetch("/api/auth/validate", {
-  //       method: "GET",
-  //       credentials: "include",
-  //     });
-  //     const data = await res.json();
-      
-  //     if (res.ok && data.user) {
-  //       setUser(data.user);
-  //     }
-  //   } catch (error) {
-  //     console.warn("No active session", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const login = async (email: string, password: string) => {
     setLoading(true);
