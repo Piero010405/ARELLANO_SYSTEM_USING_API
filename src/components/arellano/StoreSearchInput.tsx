@@ -5,7 +5,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "@/app/lib/utils";
 
 type StoreSearchProps = {
-  onStoreSelect: (store: Store) => void;
+  onStoreSelect: (store: Store | null) => void;
 };
 
 export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
@@ -13,6 +13,7 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
   const [query, setQuery] = useState("");
   const [filteredStores, setFilteredStores] = useState<Store[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [storeNotFound, setStoreNotFound] = useState(false);
 
   // Fetch inicial para cargar todas las tiendas
   useEffect(() => {
@@ -52,9 +53,18 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
     if (storeFound) {
       handleSelectStore(storeFound);
     } else {
-      alert("Código no encontrado");
+      setStoreNotFound(true);
+      onStoreSelect(null);
     }
   };
+
+  useEffect(() => {
+    if (storeNotFound) {
+      setTimeout(() => {
+        setStoreNotFound(false);
+      }, 2000);
+    }
+  }, [storeNotFound]);
 
   return (
     <div className="relative w-full max-w-md">
@@ -71,6 +81,12 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
           }}
         />
       </form>
+
+      {storeNotFound && (
+        <div className="absolute z-20 w-full mt-1 rounded-md border border-red-500 bg-red-100 px-4 py-2 text-sm text-red-800">
+          ❌ Tienda no encontrada. Por favor ingrese otro código.
+        </div>
+      )}
 
       {showSuggestions && filteredStores.length > 0 && (
         <ScrollArea className="absolute z-20 w-full mt-1 max-h-60 rounded-md border dark:bg-dark-900 border-gray-300 bg-white text-gray-800 shadow-theme-xs dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
