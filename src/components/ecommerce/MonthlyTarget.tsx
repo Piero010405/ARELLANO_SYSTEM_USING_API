@@ -31,10 +31,11 @@ export default function MonthlyTarget() {
       setFueraDT(data.fueraDT);
       setTiendasFaltantes(data.tiendasFaltantes);
       setTotalTiendas(data.totalTiendas);
-      const porcentajeCalculado = parseFloat(
+      const porcentajeCalculado = Number(
         ((data.tiendasFaltantes / data.totalTiendas) * 100).toFixed(2)
       );
-      setPorcentaje([100 - porcentajeCalculado]);
+      const porcentajeResta = Number((100 - porcentajeCalculado).toFixed(2));
+      setPorcentaje([porcentajeResta]);
     };
     fetchMetrics();
   }, []);

@@ -83,6 +83,12 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
                 icon: '',
                 sound: true,
               });
+        } finally {
+            setStatusProyectar("");
+            setRazon("");
+            setComentario("");
+            setDetalle("");
+            setAnulacionProxPeriodo("");
         }
     };
 
