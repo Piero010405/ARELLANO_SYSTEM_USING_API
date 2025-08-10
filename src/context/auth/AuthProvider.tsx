@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
    const validateSession = async () => {
     try {
-      const res = await fetch("/api/auth/session", {
+      const res = await fetch("/api/session", {
         method: "GET",
         credentials: "include",
       });
