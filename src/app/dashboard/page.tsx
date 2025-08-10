@@ -12,7 +12,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 function DashboardPage() {
   const { user } = useAuth();
-
+  
   if (!user) {
     return null;
   }

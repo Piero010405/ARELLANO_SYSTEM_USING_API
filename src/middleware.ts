@@ -12,7 +12,7 @@ export async function middleware(req: NextRequest) {
   if (!isProtectedRoute) {
     return NextResponse.next();
   }
-
+  
   if (!session.user || !session.accessToken) {
     return NextResponse.redirect(new URL("/login", req.url));
   }

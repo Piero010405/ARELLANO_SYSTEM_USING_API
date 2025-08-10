@@ -8,10 +8,11 @@ import { User } from "@/lib/types/auth";
 
 interface AuthProviderProps {
   children: ReactNode;
+  initialUser?: User | null;
 }
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider = ({ children, initialUser = null }: AuthProviderProps) => {
+  const [user, setUser] = useState<User | null>(initialUser);
   const [loading, setLoading] = useState(false);
 
   const login = async (email: string, password: string) => {
