@@ -1,6 +1,7 @@
 "use client";
 import Send from "@/icons/send";
 import { Store } from "@/lib/types/global";
+import { useLoading } from "@/context/loading/LoadingContext";
 
 interface SearchBarStoreProps {
   onSearch: (storeData: Store | null) => void;
@@ -9,10 +10,12 @@ interface SearchBarStoreProps {
 }
 
 export default function SearchBarStore({ onSearch, searchQuery, setSearchQuery  }: SearchBarStoreProps) {
+  const { show, hide } = useLoading();
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
     
     try {
+      show();
       const res = await fetch(`/api/stores/${searchQuery}`);
       const data = await res.json();
   
@@ -28,6 +31,8 @@ export default function SearchBarStore({ onSearch, searchQuery, setSearchQuery  
           console.error("Error desconocido al buscar tienda:", error);
       }
       onSearch(null);
+    } finally {
+      hide();
     }
   };
 
