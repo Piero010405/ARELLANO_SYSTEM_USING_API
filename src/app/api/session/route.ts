@@ -1,4 +1,4 @@
-//src/app/api/session/route.ts
+//src/app/api/auth/session/route.ts
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth/session";
 
