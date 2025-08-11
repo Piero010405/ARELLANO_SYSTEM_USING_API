@@ -1,7 +1,7 @@
 "use client";
 import { Store } from "@/lib/types/global";
 import { useState, useRef, useEffect, type ChangeEvent } from "react";
-import { toast } from 'nextjs-toast-notify';
+import { showToast } from 'nextjs-toast-notify';
 import StoreSearch from "./StoreSearchInput";
 import { reasonOptions } from "@/lib/utils/constants";
   
@@ -54,7 +54,7 @@ export default function FormProyeccion() {
             const result = await res.json();
 
             if (res.ok) {
-                toast.success("¡Proyección registrada exitosamente!", {
+                showToast.success("¡Proyección registrada exitosamente!", {
                     duration: 4000,
                     progress: true,
                     position: "bottom-right",
@@ -63,7 +63,7 @@ export default function FormProyeccion() {
                     sound: true,
                   });
             } else {
-                toast.error(result.message || "Error al guardar la proyección", {
+                showToast.error(result.message || "Error al guardar la proyección", {
                     duration: 4000,
                     progress: true,
                     position: "bottom-right",
@@ -74,7 +74,7 @@ export default function FormProyeccion() {
             }
         } catch (error) {
             console.error(error);
-            toast.error("Error inesperado", {
+            showToast.error("Error inesperado", {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",

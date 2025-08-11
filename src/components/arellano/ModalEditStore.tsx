@@ -1,7 +1,7 @@
 import { Modal } from "../ui/modal";
 import { Store } from "@/lib/types/global";
 import { useState, useRef, useEffect, type ChangeEvent } from "react";
-import { toast } from 'nextjs-toast-notify';
+import { showToast } from 'nextjs-toast-notify';
 import { reasonOptions } from "@/lib/utils/constants";
 
 interface ModalEditStoreProps {
@@ -54,7 +54,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
             const result = await res.json();
 
             if (res.ok) {
-                toast.success("¡Proyección registrada exitosamente!", {
+                showToast.success("¡Proyección registrada exitosamente!", {
                     duration: 4000,
                     progress: true,
                     position: "bottom-right",
@@ -64,7 +64,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
                   });
                 closeModal();
             } else {
-                toast.error(result.message || "Error al guardar la proyección", {
+                showToast.error(result.message || "Error al guardar la proyección", {
                     duration: 4000,
                     progress: true,
                     position: "bottom-right",
@@ -75,7 +75,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
             }
         } catch (error) {
             console.error(error);
-            toast.error("Error inesperado", {
+            showToast.error("Error inesperado", {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",
