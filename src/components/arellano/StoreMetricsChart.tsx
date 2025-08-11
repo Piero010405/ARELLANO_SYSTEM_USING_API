@@ -12,11 +12,11 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-interface MonthlySalesChartProps {
+interface StoreMetricsChartProps {
   username: string;
 }
 
-export default function MonthlySalesChart({username} : MonthlySalesChartProps) {
+export default function StoreMetricsChart({username} : StoreMetricsChartProps) {
   const [notaudited, setNotAudited] = useState(0);
   const [cancelled, setCancelled] = useState(0);
   const [fueraDT, setFueraDT] = useState(0);

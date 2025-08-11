@@ -14,7 +14,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function MonthlyTarget() {
+export default function StoreComplianceTarget() {
   const [porcentaje, setPorcentaje] = useState([0]);
   const [tiendasFaltantes, setTiendasFaltantes] = useState(0);
   const [totalTiendas, setTotalTiendas] = useState(0);
