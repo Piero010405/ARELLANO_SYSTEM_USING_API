@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth/requireSession";
 import { storesService } from "@/services";
 
-export async function GET(req: NextRequest,  context: { params: { codigo: string } }) {
+export async function GET(req: NextRequest,  { params }: { params: Promise<{ codigo: string }> }) {
   try {
-    const { codigo } = context.params;
+    const { codigo } = await params;
     const { session } = await requireSession(req);
     const store = await storesService.getStoreById(codigo, session.accessToken);
     return NextResponse.json(store);
