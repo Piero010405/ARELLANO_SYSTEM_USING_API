@@ -5,7 +5,7 @@ import { storesService } from "@/services";
 
 export async function GET(req: NextRequest, { params }: { params: { codigo: string } }) {
   try {
-    const { codigo } = params
+    const { codigo } = params;
     const { session } = await requireSession(req);
     const store = await storesService.getStoreById(codigo, session.accessToken);
     return NextResponse.json(store);
