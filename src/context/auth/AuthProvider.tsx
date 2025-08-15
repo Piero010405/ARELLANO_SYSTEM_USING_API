@@ -70,6 +70,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (res.ok && dataValidate.user) {
         setUser(dataValidate.user);
       } else {
+        console.log("RES", res);
+        console.log("DATA", dataValidate);
         throw new Error("No se pudo autenticar sesión");
       }
     
