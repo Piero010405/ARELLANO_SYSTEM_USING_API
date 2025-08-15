@@ -77,7 +77,7 @@ export default function SignInForm() {
               <div className="space-y-6">
                 <div>
                   <Label>
-                    Email <span className="text-error-500">*</span>{" "}
+                    Email Corporativo <span className="text-error-500">*</span>{" "}
                   </Label>
                   <Input placeholder="Ingresar correo institucional" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
