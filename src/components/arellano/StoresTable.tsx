@@ -12,22 +12,22 @@ import {
   TableRow,
 } from "../ui/table";
 import Badge from "../ui/badge/Badge";
-import SearchBarStore from "./SearchBarStore";
 import ResetButton from "./BtnReset";
 import { useModal } from "@/hooks/useModal";
 import ModalEditStore from "./ModalEditStore";
 import { useLoading } from "@/context/loading/LoadingContext";
+import StoreFilterInput from "./StoreFilterInput";
 
 interface StoresTableProps {
   pageSize?: number;
 }
 
 export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
-  const [stores, setStores] = useState<Store[]>([]);
-  const [originalStores, setOriginalStores] = useState<{ stores: Store[]; total: number }>({stores: [], total: 0});
+  const [allStores, setAllStores] = useState<Store[]>([]);
+  const [filteredStores, setFilteredStores] = useState<Store[]>([]);
+
   const [loading, setLoading] = useState(true);
-  const [searchActive, setSearchActive] = useState(false);
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalEntries, setTotalEntries] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,47 +36,48 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
   const { show, hide } = useLoading();
 
   useEffect(() => {
-    const fetchAllStores = async () => {
-      try {
-        const res = await fetch("/api/stores");
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Error desconocido");
-
-        setOriginalStores(data);
-        setTotalEntries(data.total);
-      } catch (error) {
-        console.error("Error al cargar todas las tiendas:", error);
-      }
-    };
-
-    fetchAllStores();
-  }, []);
-  
-  useEffect(() => {
     const fetchStores = async () => {
       try {
         setLoading(true);
-  
-        const res = await fetch(`/api/stores?page=${currentPage}&pageSize=${pageSize}`);
+        const res = await fetch("/api/stores?pageSize=10000&offset=0");
         const data = await res.json();
-  
+
         if (!res.ok) throw new Error(data.error || "Error desconocido");
-  
-        setStores(data.stores || []);
-        setTotalEntries(data.total || 0);
-        setSearchActive(false);
+
+        setAllStores(data.stores || []);
+        setFilteredStores(data.stores || []);
+        setTotalEntries(data.total || data.stores?.length || 0);
       } catch (error) {
         console.error("Error al cargar tiendas:", error);
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchStores();
-  }, [currentPage, pageSize]);
+  }, []);
+
+  
+  useEffect(() => {
+    if (searchQuery.trim().length > 0) {
+      const filtered = allStores.filter((store) =>
+        String(store.CODIGO).toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredStores(filtered);
+      setCurrentPage(1); // reset paginación
+      setTotalEntries(filtered.length);
+    } else {
+      setFilteredStores(allStores);
+      setTotalEntries(allStores.length);
+    }
+  }, [searchQuery, allStores]);
+
 
   const totalPages = Math.ceil(totalEntries / pageSize);
-
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedStores = filteredStores.slice(startIndex, endIndex);
+  
   const handleEditClick = async (codigo: number) => {
     try {
       show();
@@ -94,16 +95,10 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
   };
 
   const handleReset = () => {
-      setSearchQuery("");
-      setSearchActive(false);
-      setCurrentPage(1);
-
-      setTotalEntries(originalStores.total);
-
-      // Aplicar paginación sobre los datos originales
-      const startIndex = 0;
-      const endIndex = pageSize;
-      setStores(originalStores.stores.slice(startIndex, endIndex));
+    setSearchQuery("");
+    setCurrentPage(1);
+    setFilteredStores(allStores);
+    setTotalEntries(allStores.length);
   };
 
   if (loading) return (
@@ -123,29 +118,17 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
 
             <div className="flex items-center gap-x-3">
               <ResetButton onReset={handleReset} />
-              <SearchBarStore 
-              searchQuery={searchQuery} 
-              setSearchQuery={setSearchQuery}
-              onSearch={(storeData) => {
-                setSearchActive(true);
-                if (storeData) {
-                  setStores([storeData]); // Mostrar solo la tienda encontrada
-                  setTotalEntries(1);
-                } else {
-                  setStores([]); // Si no hay datos, limpiar la tabla
-                  setTotalEntries(0);
-                }
-              }} />
+              <StoreFilterInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             </div>
           </div>
         
-        {searchActive && stores.length === 0 && (
+        {!loading && filteredStores.length === 0 && (
             <div className="p-4 text-center text-gray-500 dark:text-gray-400">
                 <p>No se encontraron resultados.</p>
             </div>
         )}
 
-    {stores.length > 0 && (
+    {filteredStores.length > 0 && (
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
         <div className="max-w-full overflow-x-auto custom-scrollbar-x">
           <div className="min-w-[1102px] px-4 py-2">
@@ -177,7 +160,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
                 </TableHeader>
 
               <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
-                {stores.map((store, index) => (
+                {paginatedStores.map((store, index) => (
                   <TableRow key={index}>
                      <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
                         {store.CODIGO}
