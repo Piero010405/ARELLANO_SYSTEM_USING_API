@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, type ChangeEvent } from "react";
 import { showToast } from 'nextjs-toast-notify';
 import StoreSearch from "./StoreSearchInput";
 import { reasonOptions } from "@/lib/utils/constants";
+import { useLoading } from "@/context/loading/LoadingContext";
   
 export default function FormProyeccion() {
     const [statusProyectar, setStatusProyectar] = useState<string>("");
@@ -11,8 +12,9 @@ export default function FormProyeccion() {
     const [comentario, setComentario] = useState<string>("");
     const [detalle, setDetalle] = useState<string>("");
     const [anulacionProxPeriodo, setAnulacionProxPeriodo] = useState<string>("");
-    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
-    const [selectedStore, setSelectedStore] = useState<Store | null>(null)
+    const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+    const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+    const { show, hide } = useLoading();
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setDetalle(e.target.value)
@@ -29,6 +31,7 @@ export default function FormProyeccion() {
     }, [selectedStore])
 
     const handleSubmit = async (e: React.FormEvent) => {
+        show();
         e.preventDefault();
 
         const payload = {
@@ -89,6 +92,7 @@ export default function FormProyeccion() {
             setDetalle("");
             setAnulacionProxPeriodo("");
             setSelectedStore(null);
+            hide();
         }
     };
     
