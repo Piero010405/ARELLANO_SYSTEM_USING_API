@@ -3,6 +3,7 @@ import { Store } from "@/lib/types/global";
 import { useState, useRef, useEffect, type ChangeEvent } from "react";
 import { showToast } from 'nextjs-toast-notify';
 import { reasonOptions } from "@/lib/utils/constants";
+import { useLoading } from "@/context/loading/LoadingContext";
 
 interface ModalEditStoreProps {
     isOpen: boolean;
@@ -17,6 +18,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
     const [detalle, setDetalle] = useState<string>("");
     const [anulacionProxPeriodo, setAnulacionProxPeriodo] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+    const { show, hide } = useLoading();
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setDetalle(e.target.value)
@@ -29,6 +31,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
     }, [detalle])
 
     const handleSubmit = async (e: React.FormEvent) => {
+        show();
         e.preventDefault();
 
         const payload = {
@@ -89,6 +92,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
             setComentario("");
             setDetalle("");
             setAnulacionProxPeriodo("");
+            hide();
         }
     };
 
