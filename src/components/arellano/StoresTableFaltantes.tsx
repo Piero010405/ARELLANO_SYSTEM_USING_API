@@ -28,7 +28,7 @@ export default function StoresTablesFaltantes() {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const res = await fetch("/api/stores/stores_faltantes");
+        const res = await fetch("/api/stores/stores_faltantes", { cache: "no-store" });
         if (!res.ok) throw new Error("Error al obtener los datos");
           
         const data = await res.json();
