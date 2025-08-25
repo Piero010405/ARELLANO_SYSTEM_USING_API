@@ -6,6 +6,7 @@ import { SidebarProvider } from "@/context/sidebar/SidebarContext";
 import { ThemeProvider } from "@/context/theme/ThemeContext";
 import { AuthProvider } from "@/context/auth/AuthProvider";
 import { LoadingProvider } from "@/context/loading/LoadingContext";
+import { QueryProvider } from "@/lib/react-query/provider";
 
 const outfit = Outfit({
   variable: "--font-outfit-sans",
@@ -26,13 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} dark:bg-gray-900`}>
-        <ThemeProvider>
-          <AuthProvider>
-              <LoadingProvider>
-                <SidebarProvider>{children}</SidebarProvider>
-              </LoadingProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>
+            <AuthProvider>
+                <LoadingProvider>
+                  <SidebarProvider>{children}</SidebarProvider>
+                </LoadingProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
