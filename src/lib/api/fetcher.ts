@@ -1,10 +1,11 @@
 // src/lib/api/fetcher.ts
+import { fetchConfig } from "../react-query/config";
 export async function fetchJson<T>(
   input: RequestInfo | URL,
   init?: RequestInit & { json?: unknown }
 ): Promise<T> {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20_000); // 20s
+  const timeout = setTimeout(() => controller.abort(), fetchConfig.timeoutMs);
 
   const headers = new Headers(init?.headers);
   if (init?.json !== undefined) {

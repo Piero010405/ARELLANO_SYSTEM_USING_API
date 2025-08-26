@@ -1,19 +1,20 @@
 // src/lib/react-query/queryClient.ts
 import { QueryClient } from '@tanstack/react-query';
+import { queryConfig } from './config';
 
 export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
         // evita refetch agresivo y ahorra red
-        staleTime: 60_000,           // 1 min "fresco"
-        gcTime: 10 * 60_000,         // cache 10 min
+        staleTime: queryConfig.default.staleTime,    // => min "fresco"
+        gcTime: queryConfig.default.gcTime,         // => cache min
         refetchOnWindowFocus: false,
         refetchOnReconnect: true,
-        retry: 2,
+        retry: queryConfig.default.retry,
       },
       mutations: {
-        retry: 1,
+        retry: queryConfig.mutation.retry,
       },
     },
   });

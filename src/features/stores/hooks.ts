@@ -6,13 +6,14 @@ import { createProjection, getStoreByCodigo, getStoresFaltantes} from './api';
 import type { CreateProjectionDto } from './types';
 import { storeKeys } from './keys';
 import type { Store } from '@/lib/types/global';
+import { queryConfig } from '@/lib/react-query/config';
+import { businessLogicConfig } from '@/lib/react-query/config';
 
 export function useStoresFaltantes() {
   return useQuery({
     queryKey: storeKeys.missing(),
     queryFn: getStoresFaltantes,
-    // Ajusta si quieres que se revaliden más/menos
-    staleTime: 60_000,
+    staleTime: queryConfig.stores.staleTime,
   });
 }
 
@@ -21,7 +22,7 @@ export function useStoreByCodigo(codigo?: number) {
     queryKey: codigo ? storeKeys.byCodigo(codigo) : ['noop'],
     queryFn: () => getStoreByCodigo(codigo as number),
     enabled: !!codigo,
-    staleTime: 60_000,
+    staleTime: queryConfig.stores.staleTime,
   });
 }
 
@@ -56,7 +57,7 @@ export function useCreateProjectionWithOptimism() {
       // Opción simple: invalidar con retardo (7s + margen)
       setTimeout(() => {
         qc.invalidateQueries({ queryKey: storeKeys.missing() });
-      }, 8_000);
+      }, businessLogicConfig.indicadoresModule.maxTimeOutToExecuteProcedure);
     },
   });
 }
