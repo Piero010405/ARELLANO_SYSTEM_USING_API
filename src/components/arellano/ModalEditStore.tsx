@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, type ChangeEvent } from "react";
 import { showToast } from 'nextjs-toast-notify';
 import { reasonOptions } from "@/lib/utils/constants";
 import { useLoading } from "@/context/loading/LoadingContext";
+import { useCreateProjectionWithOptimism } from "@/features/stores/hooks";
 
 interface ModalEditStoreProps {
     isOpen: boolean;
@@ -19,6 +20,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
     const [anulacionProxPeriodo, setAnulacionProxPeriodo] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
     const { show, hide } = useLoading();
+    const mutation = useCreateProjectionWithOptimism();
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setDetalle(e.target.value)
@@ -31,8 +33,10 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
     }, [detalle])
 
     const handleSubmit = async (e: React.FormEvent) => {
-        show();
         e.preventDefault();
+        show();
+
+        if (!selectedStore) return;
 
         const payload = {
             AS: selectedStore?.AS,
@@ -46,39 +50,20 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
         };
 
         try {
-            const res = await fetch('/api/proyecciones', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+            await mutation.mutateAsync(payload);
+
+            showToast.success("¡Proyección registrada exitosamente!", {
+                duration: 4000,
+                progress: true,
+                position: "bottom-right",
+                transition: "bounceIn",
+                icon: '',
+                sound: true,
             });
-
-            const result = await res.json();
-
-            if (res.ok) {
-                showToast.success("¡Proyección registrada exitosamente!", {
-                    duration: 4000,
-                    progress: true,
-                    position: "bottom-right",
-                    transition: "bounceIn",
-                    icon: '',
-                    sound: true,
-                  });
-                closeModal();
-            } else {
-                showToast.error(result.message || "Error al guardar la proyección", {
-                    duration: 4000,
-                    progress: true,
-                    position: "bottom-right",
-                    transition: "bounceIn",
-                    icon: '',
-                    sound: true,
-                  });
-            }
+            closeModal(); // ya hicimos optimistic update y programamos un re-sync
         } catch (error) {
             console.error(error);
-            showToast.error("Error inesperado", {
+            showToast.error("Error al guardar la proyección", {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",

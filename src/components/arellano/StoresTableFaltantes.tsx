@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Store } from "@/lib/types/global";
+import { useMemo, useState } from "react";
 import BtnEditProyeccion from "./BtnEditProyeccion";
 import SearchBar from "./SearchBar";
 import ModalEditStore from "./ModalEditStore";
 import { useModal } from "@/hooks/useModal";
 import { useLoading } from "@/context/loading/LoadingContext";
+import { useStoresFaltantes } from "@/features/stores/hooks";
 
 import {
     Table,
@@ -14,63 +14,40 @@ import {
     TableHeader,
     TableRow,
   } from "../ui/table";
-  import Badge from "../ui/badge/Badge";
+import Badge from "../ui/badge/Badge";
+import type { Store } from "@/lib/types/global";
   
 export default function StoresTablesFaltantes() {
-  const [stores, setStores] = useState<Store[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filteredStores, setFilteredStores] = useState<Store[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
   const { isOpen, openModal, closeModal } = useModal();
   const { show, hide } = useLoading();
-  
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const res = await fetch("/api/stores/stores_faltantes");
-        if (!res.ok) throw new Error("Error al obtener los datos");
-          
-        const data = await res.json();
-        setStores(data);
-      } catch (error) {
-        console.error("Error al cargar tiendas:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchStores();
-  }, []);
 
-  useEffect(() => {
-    const filtered = stores.filter(store =>
-      String(store.CODIGO).includes(searchQuery.toLowerCase())
-    );
-    setFilteredStores(filtered);
+  const { data: stores = [], isLoading } = useStoresFaltantes();
+
+  const filteredStores = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return stores.filter(s => String(s.CODIGO).toLowerCase().includes(q));
   }, [searchQuery, stores]);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
+  const handleSearch = (q: string) => setSearchQuery(q);
 
   const handleEditClick = async (codigo: number) => {
     try {
       show();
-      const res = await fetch(`/api/stores/${codigo}`);
+      // puedes usar useStoreByCodigo en el modal si prefieres
+      const res = await fetch(`/api/stores/${codigo}`, { cache: "no-store" });
       const data = await res.json();
-      if (!res.ok) throw new Error("Error al obtener los datos de la tienda");
-
-      setSelectedStore(data); // Guardamos la tienda en el estado
+      setSelectedStore(data);
       openModal();
-    } catch (error) {
-      console.error("Error al cargar tienda:", error);
+    } catch (e) {
+      console.error(e);
     } finally {
       hide();
     }
   };
 
-  if (loading) return (
+  if (isLoading) return (
   <>
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
       <p className="text-lg font-semibold text-gray-800 dark:text-white/90">Cargando...</p>
@@ -225,7 +202,7 @@ export default function StoresTablesFaltantes() {
           </div>
         </div>
       </div>
-      {!loading && stores.length === 0 && (
+      {!isLoading && stores.length === 0 && (
         <div className="text-center text-sm text-gray-500 pt-3">No hay tiendas faltantes.</div>
       )}
     </div>

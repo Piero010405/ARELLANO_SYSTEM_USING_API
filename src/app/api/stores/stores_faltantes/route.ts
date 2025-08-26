@@ -9,8 +9,7 @@ export async function GET(req: NextRequest) {
     const { session } = await requireSession(req);
     const data = await storesService.getStoresFaltantes(session.accessToken);
     return NextResponse.json(data, {
-      headers: { "Cache-Control": "no-store, no-cache, must-revalidate" }
-    });
+      headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("Error al obtener tiendas faltantes:", error);
     return new NextResponse("Error interno", { status: 500 });
