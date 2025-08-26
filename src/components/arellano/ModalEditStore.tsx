@@ -1,5 +1,4 @@
 import { Modal } from "../ui/modal";
-import { Store } from "@/lib/types/global";
 import { useState, useRef, useEffect, type ChangeEvent } from "react";
 import { showToast } from 'nextjs-toast-notify';
 import { reasonOptions } from "@/lib/utils/constants";
@@ -14,7 +13,7 @@ interface ModalEditStoreProps {
 }
 
 export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }: ModalEditStoreProps) {
-    const { data: store } = useStoreByCodigo(selectedStoreCode);
+    const { data: store, isLoading } = useStoreByCodigo(selectedStoreCode ?? undefined);
 
     const [statusProyectar, setStatusProyectar] = useState<string>("");
     const [razon, setRazon] = useState<string>("");
@@ -24,6 +23,14 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
     const { show, hide } = useLoading();
     const mutation = useCreateProjectionWithOptimism();
+
+    useEffect(() => {
+        if (isLoading) {
+            show();
+        } else {
+            hide();
+        }
+    }, [isLoading, show, hide]);
 
     useEffect(() => {
         setStatusProyectar("");

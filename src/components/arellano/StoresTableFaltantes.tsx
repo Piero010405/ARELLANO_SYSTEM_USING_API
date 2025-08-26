@@ -4,7 +4,6 @@ import BtnEditProyeccion from "./BtnEditProyeccion";
 import SearchBar from "./SearchBar";
 import ModalEditStore from "./ModalEditStore";
 import { useModal } from "@/hooks/useModal";
-import { useLoading } from "@/context/loading/LoadingContext";
 import { useStoresFaltantes } from "@/features/stores/hooks";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/table";
 import Badge from "../ui/badge/Badge";
@@ -13,7 +12,6 @@ export default function StoresTablesFaltantes() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStoreCode, setSelectedStoreCode] = useState<number | null>(null);
   const { isOpen, openModal, closeModal } = useModal();
-  const { show, hide } = useLoading();
 
   const { data: stores = [], isLoading } = useStoresFaltantes();
 
