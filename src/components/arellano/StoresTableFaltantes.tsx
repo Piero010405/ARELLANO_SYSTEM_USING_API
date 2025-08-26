@@ -6,14 +6,7 @@ import ModalEditStore from "./ModalEditStore";
 import { useModal } from "@/hooks/useModal";
 import { useLoading } from "@/context/loading/LoadingContext";
 import { useStoresFaltantes } from "@/features/stores/hooks";
-
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHeader,
-    TableRow,
-  } from "../ui/table";
+import { Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/table";
 import Badge from "../ui/badge/Badge";
 import type { Store } from "@/lib/types/global";
   
