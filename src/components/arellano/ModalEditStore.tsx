@@ -58,6 +58,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
         };
 
         try {
+            // OPTIMISTIC UPDATE FOR PROYECCION
             await mutation.mutateAsync(payload);
 
             showToast.success("¡Proyección registrada exitosamente!", {
@@ -68,7 +69,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
                 icon: '',
                 sound: true,
             });
-            closeModal(); // ya hicimos optimistic update y programamos un re-sync
+            closeModal(); // CERRAR MODAL,ya hicimos optimistic update y programamos un re-sync
         } catch (error) {
             console.error(error);
             showToast.error("Error al guardar la proyección", {
