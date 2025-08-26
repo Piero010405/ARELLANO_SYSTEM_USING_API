@@ -212,7 +212,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
         onPageChange={setCurrentPage} />
     )}
 
-    <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStore={selectedStore} />
+    <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStore?.CODIGO ?? null} />
     </div>
 
   );
