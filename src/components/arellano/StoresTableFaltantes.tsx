@@ -8,11 +8,10 @@ import { useLoading } from "@/context/loading/LoadingContext";
 import { useStoresFaltantes } from "@/features/stores/hooks";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/table";
 import Badge from "../ui/badge/Badge";
-import type { Store } from "@/lib/types/global";
-  
+
 export default function StoresTablesFaltantes() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+  const [selectedStoreCode, setSelectedStoreCode] = useState<number | null>(null);
   const { isOpen, openModal, closeModal } = useModal();
   const { show, hide } = useLoading();
 
@@ -25,19 +24,9 @@ export default function StoresTablesFaltantes() {
 
   const handleSearch = (q: string) => setSearchQuery(q);
 
-  const handleEditClick = async (codigo: number) => {
-    try {
-      show();
-      // puedes usar useStoreByCodigo en el modal si prefieres
-      const res = await fetch(`/api/stores/${codigo}`, { cache: "no-store" });
-      const data = await res.json();
-      setSelectedStore(data);
-      openModal();
-    } catch (e) {
-      console.error(e);
-    } finally {
-      hide();
-    }
+  const handleEditClick = (codigo: number) => {
+    setSelectedStoreCode(codigo);
+    openModal();
   };
 
   if (isLoading) return (
@@ -199,7 +188,7 @@ export default function StoresTablesFaltantes() {
         <div className="text-center text-sm text-gray-500 pt-3">No hay tiendas faltantes.</div>
       )}
     </div>
-     <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStore={selectedStore} />
+     <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStoreCode} />
     </>
   );
 }

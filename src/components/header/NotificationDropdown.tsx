@@ -1,24 +1,16 @@
 "use client";
 import Image from "next/image";
 // import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { Metrics } from "@/lib/types/global";
+import { useMetrics } from '@/features/metrics/hooks';
 
 export default function NotificationDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
-  const [tiendasFaltantes, setTiendasFaltantes] = useState(0);
 
-  useEffect(() => {
-    const fetchMetrics = async () => {
-      const res = await fetch("/api/metricas");
-      const data: Metrics = await res.json();
-      setTiendasFaltantes(data.tiendasFaltantes);
-    };
-    fetchMetrics();
-  }, []);
+  const { data: metrics } = useMetrics();
 
   function toggleDropdown() {
     setIsOpen(!isOpen);
@@ -111,9 +103,9 @@ export default function NotificationDropdown() {
                   <span className="font-medium text-gray-800 dark:text-white/90">
                     Usuario,
                   </span>
-                  <span>tiene {tiendasFaltantes <= 1 ? `regsitrada` : `regsitradas`}</span>
+                  <span>tiene {metrics?.tiendasFaltantes ?? 0 <= 1 ? `regsitrada` : `regsitradas`}</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    {tiendasFaltantes === 1 ? `${tiendasFaltantes} tienda faltante` : `${tiendasFaltantes} tiendas faltantes`}
+                    {metrics?.tiendasFaltantes === 1 ? `${metrics?.tiendasFaltantes ?? 0} tienda faltante` : `${metrics?.tiendasFaltantes ?? 0} tiendas faltantes`}
                   </span>
                 </span>
 
