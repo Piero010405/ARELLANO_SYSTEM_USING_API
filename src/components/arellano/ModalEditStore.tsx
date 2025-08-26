@@ -22,6 +22,14 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
     const { show, hide } = useLoading();
     const mutation = useCreateProjectionWithOptimism();
 
+    useEffect(() => {
+        setStatusProyectar("");
+        setRazon("");
+        setComentario("");
+        setDetalle("");
+        setAnulacionProxPeriodo("");
+    }, [selectedStore])
+
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setDetalle(e.target.value)
     }
@@ -211,7 +219,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
                                         type="text"
                                         value={(selectedStore.OOEE_A_REPORTAR == '0' && selectedStore.DT_A_REPORTAR == 'FUERA DE DT' ? selectedStore.DT_A_REPORTAR : selectedStore.OOEE_A_REPORTAR)}
                                         readOnly
-                                        className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                                        className="dark:bg-dark-900 h-11 w-full rounded-lg border border-green-300 bg-transparent px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-green-400 dark:bg-gray-900 dark:placeholder:text-white/30 dark:focus:border-brand-800 text-green-400/90"
                                         />
                                 </div>
                             </div>
@@ -270,7 +278,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
 
                             {/* Comentario Dropdown */}
                             {statusProyectar && razon && reasonOptions[statusProyectar][razon].length > 0 && (
-                                <div className="relative mt-4">
+                                <div className="relative mt-1">
                                     <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                         Comentario
                                     </label>
@@ -295,7 +303,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
 
                             {/* Pregunta adicional solo si es NOTAUDITED */}
                             {statusProyectar === "NOTAUDITED" && (
-                                <div className="mt-4">
+                                <div className="mt-1">
                                     <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                         ¿La tienda se anulará el próximo periodo?
                                     </label>
@@ -318,7 +326,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStore }: Mo
                             )}
 
                             {/* Detalle de razón */}
-                            <div className="mt-4">
+                            <div className="mt-1">
                                 <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                     Detalle de razón
                                 </label>
