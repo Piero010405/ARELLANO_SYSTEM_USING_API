@@ -2,7 +2,8 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createProjection, getStoreByCodigo, getStoresFaltantes, type CreateProjectionDto } from './api';
+import { createProjection, getStoreByCodigo, getStoresFaltantes} from './api';
+import type { CreateProjectionDto } from './types';
 import { storeKeys } from './keys';
 import type { Store } from '@/lib/types/global';
 
@@ -30,7 +31,7 @@ export function useCreateProjectionWithOptimism() {
   return useMutation({
     mutationFn: (dto: CreateProjectionDto) => createProjection(dto),
 
-    // Optimistic update: quita la tienda faltante de la cache inmediatamente
+    // * Optimistic update: quita la tienda faltante de la cache inmediatamente
     onMutate: async (dto) => {
       await qc.cancelQueries({ queryKey: storeKeys.missing() });
       const prev = qc.getQueryData<Store[]>(storeKeys.missing());
