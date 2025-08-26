@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createProjection, getStoreByCodigo, getStoresFaltantes} from './api';
 import type { CreateProjectionDto } from './types';
 import { storeKeys } from './keys';
+import { metricsKeys } from '../metrics/keys';
 import type { Store } from '@/lib/types/global';
 import { queryConfig } from '@/lib/react-query/config';
 import { businessLogicConfig } from '@/lib/react-query/config';
@@ -52,11 +53,12 @@ export function useCreateProjectionWithOptimism() {
       if (ctx?.prev) qc.setQueryData(storeKeys.missing(), ctx.prev);
     },
 
-    // Sincronización real con servidor cuando el SP termina (~7s)
+    // Sincronización real con servidor cuando el SP termina (~7s) => maxTimeOutToExecuteProcedure
     onSettled: () => {
       // Opción simple: invalidar con retardo (7s + margen)
       setTimeout(() => {
         qc.invalidateQueries({ queryKey: storeKeys.missing() });
+        qc.invalidateQueries({ queryKey: metricsKeys.all });
       }, businessLogicConfig.indicadoresModule.maxTimeOutToExecuteProcedure);
     },
   });
