@@ -2,7 +2,7 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createProjection, getStoreByCodigo, getStoresFaltantes} from './api';
+import { createProjection, getStoreByCodigo, getStoresFaltantes, getStoresProyectadas} from './api';
 import type { CreateProjectionDto } from './types';
 import { storeKeys } from './keys';
 import { metricsKeys } from '../metrics/keys';
@@ -14,6 +14,14 @@ export function useStoresFaltantes() {
   return useQuery({
     queryKey: storeKeys.missing(),
     queryFn: getStoresFaltantes,
+    staleTime: queryConfig.stores.staleTime,
+  });
+}
+
+export function useStoresProyectadas() {
+  return useQuery({
+    queryKey: storeKeys.proyectadas(),
+    queryFn: getStoresProyectadas,
     staleTime: queryConfig.stores.staleTime,
   });
 }

@@ -5,43 +5,17 @@ import BtnEditProyeccion from "./BtnEditProyeccion";
 import SearchBar from "./SearchBar";
 import ModalEditStore from "./ModalEditStore";
 import { useModal } from "@/hooks/useModal";
-import { useLoading } from "@/context/loading/LoadingContext";
-
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHeader,
-    TableRow,
-  } from "../ui/table";
-  import Badge from "../ui/badge/Badge";
+import { useStoresProyectadas } from "@/features/stores/hooks";
+import { Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/table";
+import Badge from "../ui/badge/Badge";
   
 export default function StoresTablesProyectadas() {
-  const [stores, setStores] = useState<Store[]>([]);
-  const [loading, setLoading] = useState(true);
   const [filteredStores, setFilteredStores] = useState<Store[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+  const [selectedStoreCode, setSelectedStoreCode] = useState<number | null>(null);
   const { isOpen, openModal, closeModal } = useModal();
-  const { show, hide } = useLoading();
   
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const res = await fetch("/api/stores/stores_proyectadas");
-        if (!res.ok) throw new Error("Error al obtener los datos");
-          
-        const data = await res.json();
-        setStores(data);
-      } catch (error) {
-        console.error("Error al cargar tiendas:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchStores();
-  }, []);
+  const { data: stores = [], isLoading } = useStoresProyectadas();
 
   useEffect(() => {
     const filtered = stores.filter(store =>
@@ -54,23 +28,12 @@ export default function StoresTablesProyectadas() {
     setSearchQuery(query);
   };
 
-  const handleEditClick = async (codigo: number) => {
-    try {
-      show();
-      const res = await fetch(`/api/stores/${codigo}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error("Error al obtener los datos de la tienda");
-
-      setSelectedStore(data); // Guardamos la tienda en el estado
-      openModal();
-    } catch (error) {
-      console.error("Error al cargar tienda:", error);
-    } finally {
-      hide();
-    }
+  const handleEditClick = (codigo: number) => {
+    setSelectedStoreCode(codigo);
+    openModal();
   };
 
-  if (loading) return (
+  if (isLoading) return (
   <>
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
       <p className="text-lg font-semibold text-gray-800 dark:text-white/90">Cargando...</p>
@@ -236,11 +199,11 @@ export default function StoresTablesProyectadas() {
           </div>
         </div>
       </div>
-      {!loading && stores.length === 0 && (
+      {!isLoading && stores.length === 0 && (
         <div className="text-center text-sm text-gray-500 pt-3">No hay tiendas proyectadas.</div>
       )}
     </div>
-     <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStore} />
+     <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStoreCode} />
     </>
   );
 }
