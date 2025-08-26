@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Store } from "@/lib/types/global";
+import { Store } from "@/lib/api/types";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "@/app/lib/utils";

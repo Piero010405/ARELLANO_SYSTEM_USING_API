@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Store } from "@/lib/types/global";
+import { Store } from "@/lib/api/types";
 import BtnEditProyeccion from "./BtnEditProyeccion";
 import Pagination from "../tables/Pagination";
 

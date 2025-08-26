@@ -1,6 +1,6 @@
 "use client";
 import Send from "@/icons/send";
-import { Store } from "@/lib/types/global";
+import { Store } from "@/lib/api/types";
 import { useLoading } from "@/context/loading/LoadingContext";
 
 interface SearchBarStoreProps {

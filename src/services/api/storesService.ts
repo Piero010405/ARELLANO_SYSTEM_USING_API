@@ -1,6 +1,6 @@
 // src/services/api/storesService.ts
 import axiosBackend from "@/lib/api/client";
-import { Store } from "@/lib/types/global";
+import { Store } from "@/lib/api/types";
 import { API_ENDPOINTS } from "@/lib/api/endpoints";
 
 export const storesService = {

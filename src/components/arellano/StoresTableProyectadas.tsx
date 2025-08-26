@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Store } from "@/lib/types/global";
+import { Store } from "@/lib/api/types";
 import BtnEditProyeccion from "./BtnEditProyeccion";
 import SearchBar from "./SearchBar";
 import ModalEditStore from "./ModalEditStore";
@@ -240,7 +240,7 @@ export default function StoresTablesProyectadas() {
         <div className="text-center text-sm text-gray-500 pt-3">No hay tiendas proyectadas.</div>
       )}
     </div>
-     <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStore={selectedStore} />
+     <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStore} />
     </>
   );
 }

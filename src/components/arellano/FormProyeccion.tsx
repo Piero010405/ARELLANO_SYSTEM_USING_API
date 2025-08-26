@@ -1,5 +1,5 @@
 "use client";
-import { Store } from "@/lib/types/global";
+import { Store } from "@/lib/api/types";
 import { useState, useRef, useEffect, type ChangeEvent } from "react";
 import { showToast } from 'nextjs-toast-notify';
 import StoreSearch from "./StoreSearchInput";

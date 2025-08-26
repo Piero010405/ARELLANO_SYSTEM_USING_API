@@ -6,7 +6,7 @@ import { createProjection, getStoreByCodigo, getStoresFaltantes} from './api';
 import type { CreateProjectionDto } from './types';
 import { storeKeys } from './keys';
 import { metricsKeys } from '../metrics/keys';
-import type { Store } from '@/lib/types/global';
+import type { Store } from '@/lib/api/types';
 import { queryConfig } from '@/lib/react-query/config';
 import { businessLogicConfig } from '@/lib/react-query/config';
 

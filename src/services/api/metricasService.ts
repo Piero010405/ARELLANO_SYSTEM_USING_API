@@ -1,6 +1,6 @@
 // src/services/api/metricasService.ts
 import axiosBackend from "@/lib/api/client";
-import { Metrics } from "@/lib/types/global";
+import { Metrics } from "@/lib/api/types";
 import { API_ENDPOINTS } from "@/lib/api/endpoints";
 
 export const metricasService = {

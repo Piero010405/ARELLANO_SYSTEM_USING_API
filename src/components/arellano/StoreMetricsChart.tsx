@@ -2,7 +2,7 @@
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Metrics } from "@/lib/types/global";
+import { Metrics } from "@/lib/api/types";
 // import { MoreDotIcon } from "@/icons";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
 // import { Dropdown } from "../ui/dropdown/Dropdown";
