@@ -89,8 +89,6 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
         }
     };
 
-    // if (!store) return null;
-
     return (
         <Modal isOpen={isOpen} onClose={closeModal}>
             {(!store || isLoading || mutation.isPending) && <LoadingOverlay />}
