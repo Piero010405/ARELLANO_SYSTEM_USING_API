@@ -2,7 +2,7 @@
 // import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { useEffect, useState } from "react";
-import { Metrics } from "@/lib/api/types";
+import { useMetrics } from "@/features/metrics/hooks";
 
 import dynamic from "next/dynamic";
 // import { Dropdown } from "../ui/dropdown/Dropdown";
@@ -22,23 +22,21 @@ export default function StoreComplianceTarget() {
   const [cancelled, setCancelled] = useState(0);
   const [fueraDT, setFueraDT] = useState(0);
 
+  const { data: metrics } = useMetrics();
+
   useEffect(() => {
-    const fetchMetrics = async () => {
-      const res = await fetch("/api/metricas");
-      const data: Metrics = await res.json();
-      setNotAudited(data.notaudited);
-      setCancelled(data.cancelled);
-      setFueraDT(data.fueraDT);
-      setTiendasFaltantes(data.tiendasFaltantes);
-      setTotalTiendas(data.totalTiendas);
-      const porcentajeCalculado = Number(
-        ((data.tiendasFaltantes / data.totalTiendas) * 100).toFixed(2)
-      );
-      const porcentajeResta = Number((100 - porcentajeCalculado).toFixed(2));
-      setPorcentaje([porcentajeResta]);
-    };
-    fetchMetrics();
-  }, []);
+    if (!metrics) return;
+    setNotAudited(metrics.notaudited);
+    setCancelled(metrics.cancelled);
+    setFueraDT(metrics.fueraDT);
+    setTiendasFaltantes(metrics.tiendasFaltantes);
+    setTotalTiendas(metrics.totalTiendas);
+    const porcentajeCalculado = Number(
+      ((metrics.tiendasFaltantes / metrics.totalTiendas) * 100).toFixed(2)
+    );
+    const porcentajeResta = Number((100 - porcentajeCalculado).toFixed(2));
+    setPorcentaje([porcentajeResta]);
+  }, [metrics]);
 
   const options: ApexOptions = {
     colors: ["#465FFF"],

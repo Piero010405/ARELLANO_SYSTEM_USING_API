@@ -2,7 +2,7 @@
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Metrics } from "@/lib/api/types";
+import { useMetrics } from "@/features/metrics/hooks";
 // import { MoreDotIcon } from "@/icons";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
 // import { Dropdown } from "../ui/dropdown/Dropdown";
@@ -22,17 +22,15 @@ export default function StoreMetricsChart({username} : StoreMetricsChartProps) {
   const [fueraDT, setFueraDT] = useState(0);
   const [fullAudit, setFullAudit] = useState(0);
 
+  const { data: metrics } = useMetrics();
+
   useEffect(() => {
-    const fetchMetrics = async () => {
-      const res = await fetch("/api/metricas");
-      const data: Metrics = await res.json();
-      setNotAudited(data.notaudited);
-      setCancelled(data.cancelled);
-      setFueraDT(data.fueraDT);
-      setFullAudit(data.fullAudit);
-    };
-    fetchMetrics();
-  }, []);
+    if (!metrics) return;
+    setNotAudited(metrics.notaudited);
+    setCancelled(metrics.cancelled);
+    setFueraDT(metrics.fueraDT);
+    setFullAudit(metrics.fullAudit);
+  }, [metrics]);
 
 
   const options: ApexOptions = {
