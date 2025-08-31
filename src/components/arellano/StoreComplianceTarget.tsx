@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useMetrics } from "@/features/metrics/hooks";
 
 import dynamic from "next/dynamic";
+import { StoreComplianceSkeleton } from "./skeletons";
 // import { Dropdown } from "../ui/dropdown/Dropdown";
 // import { MoreDotIcon } from "@/icons";
 // import { useState } from "react";
@@ -22,7 +23,7 @@ export default function StoreComplianceTarget() {
   const [cancelled, setCancelled] = useState(0);
   const [fueraDT, setFueraDT] = useState(0);
 
-  const { data: metrics } = useMetrics();
+  const { data: metrics, isLoading } = useMetrics();
 
   useEffect(() => {
     if (!metrics) return;
@@ -95,6 +96,8 @@ export default function StoreComplianceTarget() {
   // function closeDropdown() {
   //   setIsOpen(false);
   // }
+
+  if (isLoading) return <StoreComplianceSkeleton />;
 
   return (
     <div className="rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">

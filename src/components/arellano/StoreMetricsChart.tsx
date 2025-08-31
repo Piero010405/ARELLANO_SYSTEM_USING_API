@@ -3,6 +3,7 @@ import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useMetrics } from "@/features/metrics/hooks";
+import { StoreMetricsSkeleton } from "./skeletons";
 // import { MoreDotIcon } from "@/icons";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
 // import { Dropdown } from "../ui/dropdown/Dropdown";
@@ -22,7 +23,7 @@ export default function StoreMetricsChart({username} : StoreMetricsChartProps) {
   const [fueraDT, setFueraDT] = useState(0);
   const [fullAudit, setFullAudit] = useState(0);
 
-  const { data: metrics } = useMetrics();
+  const { data: metrics, isLoading } = useMetrics();
 
   useEffect(() => {
     if (!metrics) return;
@@ -119,6 +120,8 @@ export default function StoreMetricsChart({username} : StoreMetricsChartProps) {
   // function closeDropdown() {
   //   setIsOpen(false);
   // }
+
+  if (isLoading) return <StoreMetricsSkeleton />;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6">

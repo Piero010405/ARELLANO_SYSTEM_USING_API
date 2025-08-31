@@ -17,6 +17,20 @@ body.dark-mode {
   --fill-color: #FFFFFF; /* Blanco */
 }
 
+/* EKELETON ANIMATION */
+@keyframes pulse-no-scale {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-no-scale {
+  animation: pulse-no-scale 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 /* body {
   @apply bg-[var(--dark-bg)] text-white font-[var(--font-poppins)];
 } */

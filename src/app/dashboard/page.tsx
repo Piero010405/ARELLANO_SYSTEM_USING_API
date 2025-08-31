@@ -22,7 +22,7 @@ function DashboardPage() {
       <div className="grid grid-cols-12 gap-4 md:gap-6">
 
         <div className="col-span-12 xl:col-span-7 space-y-6">
-          <StoreMetricsChart username={user.name} />
+            <StoreMetricsChart username={user.name} />
           <StoresTable />
         </div>
         
