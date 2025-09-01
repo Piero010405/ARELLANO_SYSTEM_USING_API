@@ -120,7 +120,6 @@ export default function AppHeader () {
             </svg>
           </button>
           
-          
           {/* <div className="hidden lg:block">
             <form>
               <div className="relative">

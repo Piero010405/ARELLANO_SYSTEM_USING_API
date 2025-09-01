@@ -131,16 +131,21 @@ export function StoresTableSkeleton() {
 export default function NotificationDropdownSkeleton() {
   return (
     <>
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-gray-700">
-        <div className="h-5 w-28 rounded bg-gray-200 dark:bg-gray-700" />
-        <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-700" />
+      <div className="flex items-center justify-between mt-1 pb-3 mb-3 border-b border-gray-100 dark:border-gray-700">
+        <div className="h-5 w-28 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+        <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
       </div>
 
-      <div className="flex gap-3 items-center">
-        <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700" />
+      <div className="flex gap-3 items-start mt-4">
+        <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
         <div className="flex flex-col gap-2">
-          <div className="h-4 w-40 rounded bg-gray-200 dark:bg-gray-700" />
-          <div className="h-3 w-32 rounded bg-gray-200 dark:bg-gray-700" />
+          <div className="h-4 w-40 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+          <div className="h-3 w-32 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+          <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400 mt-1">
+            <div className="h-2 w-10 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"/>
+                <span className="w-1 h-1 g-gray-200 dark:bg-gray-700 animate-pulse-no-scale rounded-full"></span>
+                <div className="h-2 w-10 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"/>
+          </span>
         </div>
       </div>
     </>
