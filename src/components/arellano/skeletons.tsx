@@ -120,7 +120,7 @@ export function StoresTableSkeleton() {
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"
+            className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"
           />
         ))}
       </div>
@@ -130,7 +130,7 @@ export function StoresTableSkeleton() {
 
 export default function NotificationDropdownSkeleton() {
   return (
-    <div className="absolute -right-[240px] mt-[17px] flex h-[180px] w-[350px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark sm:w-[361px] lg:right-0 animate-pulse">
+    <>
       <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-gray-700">
         <div className="h-5 w-28 rounded bg-gray-200 dark:bg-gray-700" />
         <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-700" />
@@ -143,6 +143,6 @@ export default function NotificationDropdownSkeleton() {
           <div className="h-3 w-32 rounded bg-gray-200 dark:bg-gray-700" />
         </div>
       </div>
-    </div>
+    </>
   );
 }
