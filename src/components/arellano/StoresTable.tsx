@@ -17,6 +17,7 @@ import { useModal } from "@/hooks/useModal";
 import ModalEditStore from "./ModalEditStore";
 import { useLoading } from "@/context/loading/LoadingContext";
 import StoreFilterInput from "./StoreFilterInput";
+import { StoresTableSkeleton } from "./skeletons";
 
 interface StoresTableProps {
   pageSize?: number;
@@ -101,11 +102,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
     setTotalEntries(allStores.length);
   };
 
-  if (loading) return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
-      <p className="text-lg font-semibold text-gray-800 dark:text-white/90">Cargando...</p>
-    </div>
-  );
+  if (loading) return <StoresTableSkeleton />;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">

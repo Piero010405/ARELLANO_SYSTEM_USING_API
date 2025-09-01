@@ -7,6 +7,7 @@ import { useModal } from "@/hooks/useModal";
 import { useStoresFaltantes } from "@/features/stores/hooks";
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/table";
 import Badge from "../ui/badge/Badge";
+import { StoresTablesFaltantesSkeleton } from "./skeletons";
 
 export default function StoresTablesFaltantes() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,13 +28,7 @@ export default function StoresTablesFaltantes() {
     openModal();
   };
 
-  if (isLoading) return (
-  <>
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
-      <p className="text-lg font-semibold text-gray-800 dark:text-white/90">Cargando...</p>
-    </div>
-  </>
-  );
+  if (isLoading) return <StoresTablesFaltantesSkeleton />;
 
   return (
     <>

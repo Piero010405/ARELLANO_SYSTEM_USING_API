@@ -53,3 +53,96 @@ export function StoreComplianceSkeleton() {
     </div>
   );
 }
+
+export function StoresTablesFaltantesSkeleton() {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
+      <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="h-6 w-40 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+        <div className="h-8 w-48 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
+        <div className="max-w-full overflow-x-auto custom-scrollbar-x">
+          <div className="min-w-[1102px] px-4 py-2">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800 animate-pulse-no-scale"
+              >
+                {[...Array(9)].map((__, j) => (
+                  <div
+                    key={j}
+                    className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-700"
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function StoresTableSkeleton() {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
+      <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="h-6 w-32 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+        <div className="flex gap-3">
+          <div className="h-8 w-20 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+          <div className="h-8 w-48 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+        </div>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
+        <div className="max-w-full overflow-x-auto custom-scrollbar-x">
+          <div className="min-w-[1102px] px-4 py-2">
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800 animate-pulse-no-scale"
+              >
+                {[...Array(7)].map((__, j) => (
+                  <div
+                    key={j}
+                    className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-700"
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 flex justify-center gap-2">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function NotificationDropdownSkeleton() {
+  return (
+    <div className="absolute -right-[240px] mt-[17px] flex h-[180px] w-[350px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark sm:w-[361px] lg:right-0 animate-pulse">
+      <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-gray-700">
+        <div className="h-5 w-28 rounded bg-gray-200 dark:bg-gray-700" />
+        <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-700" />
+      </div>
+
+      <div className="flex gap-3 items-center">
+        <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700" />
+        <div className="flex flex-col gap-2">
+          <div className="h-4 w-40 rounded bg-gray-200 dark:bg-gray-700" />
+          <div className="h-3 w-32 rounded bg-gray-200 dark:bg-gray-700" />
+        </div>
+      </div>
+    </div>
+  );
+}
