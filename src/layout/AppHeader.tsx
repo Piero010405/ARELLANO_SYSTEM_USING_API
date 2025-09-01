@@ -171,8 +171,7 @@ export default function AppHeader () {
             {/* <!-- Notification Menu Area --> */}
           </div>
           {/* <!-- User Area --> */}
-          <UserDropdown /> 
-    
+          <UserDropdown />     
         </div>
       </div>
     </header>

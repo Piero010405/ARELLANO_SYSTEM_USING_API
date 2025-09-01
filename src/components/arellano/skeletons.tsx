@@ -143,11 +143,47 @@ export default function NotificationDropdownSkeleton() {
           <div className="h-3 w-32 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
           <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400 mt-1">
             <div className="h-2 w-10 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"/>
-                <span className="w-1 h-1 g-gray-200 dark:bg-gray-700 animate-pulse-no-scale rounded-full"></span>
-                <div className="h-2 w-10 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"/>
+              <span className="w-1 h-1 g-gray-200 dark:bg-gray-700 animate-pulse-no-scale rounded-full"></span>
+              <div className="h-2 w-10 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"/>
           </span>
         </div>
       </div>
     </>
+  );
+}
+
+export function UserDropdownSkeleton() {
+  return (
+    <div className="relative">
+      {/* Botón simulando el avatar y nombre */}
+      <button
+        disabled
+        className="flex items-center text-gray-400 cursor-not-allowed"
+      >
+        {/* Avatar */}
+        <span className="mr-3 overflow-hidden rounded-full h-11 w-11 bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale" />
+
+        {/* Nombre */}
+        <span className="block mr-1 h-4 w-27 rounded bg-gray-200 dark:bg-gray-700 animate-pulse-no-scale"></span>
+
+        {/* Icono dropdown */}
+        <svg
+          className="stroke-gray-300 dark:stroke-gray-600"
+          width="18"
+          height="20"
+          viewBox="0 0 18 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.3125 8.65625L9 13.3437L13.6875 8.65625"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
   );
 }

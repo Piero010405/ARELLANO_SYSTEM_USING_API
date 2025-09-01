@@ -5,15 +5,12 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 import { useState } from "react";
 import { useAuth } from '@/hooks/useAuth';
 import Link from "next/link";
+import { UserDropdownSkeleton } from "../arellano/skeletons";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { user, logout } = useAuth();
-  
-  if (!user) {
-    return null;
-  }
+  const { user, logout, loading } = useAuth();
 
   function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
@@ -23,6 +20,11 @@ export default function UserDropdown() {
   function closeDropdown() {
     setIsOpen(false);
   }
+
+    
+  if (!user) return <UserDropdownSkeleton />
+
+  if (loading) return <UserDropdownSkeleton />
 
   return (
     <div className="relative">
