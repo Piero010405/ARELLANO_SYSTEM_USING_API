@@ -6,7 +6,6 @@ import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState, FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { useLoading } from "@/context/loading/LoadingContext";
 
@@ -16,7 +15,6 @@ export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);;
-  const router = useRouter();
   const { show, hide } = useLoading();
   const { login } = useAuth();
 
@@ -27,7 +25,7 @@ export default function SignInForm() {
     try {
       show();
       await login(email, password);
-      router.replace("/dashboard");
+      window.location.href = "/dashboard"
     } catch (error) {
       console.error("Login error:", error);
       setError("Credenciales incorrectas");
