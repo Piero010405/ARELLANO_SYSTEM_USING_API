@@ -48,26 +48,26 @@ const navItems: NavItem[] = [
   //   name: "User Profile",
   //   path: "/profile",
   // },
-
   {
-    name: "Formulario",
-    icon: <ListIcon />,
-    path: "/dashboard/registrar-proyeccion"
+    name: "Módulo Indicadores",
+    icon: <TableIcon />,
+    subItems: 
+    [ { name: "Formulario", path: "/dashboard/registrar-proyeccion", pro: false }, 
+      { name: "Mis Tiendas Proyectadas", path: "/dashboard/tiendas/tiendas-proyectadas", pro: false }, 
+      { name: "Mis Tiendas Faltantes", path: "/dashboard/tiendas/tiendas-faltantes", pro: false }],
   },
   {
     name: "Mis Tiendas",
-    icon: <TableIcon />,
-    subItems: [ { name: "Todas Mis Tiendas", path: "/dashboard/tiendas/todas-mis-tiendas", pro: false }, 
-                { name: "Mis Tiendas Proyectadas", path: "/dashboard/tiendas/tiendas-proyectadas", pro: false }, 
-                { name: "Mis Tiendas Faltantes", path: "/dashboard/tiendas/tiendas-faltantes", pro: false }],
+    icon: <ListIcon />,
+    path: "/dashboard/tiendas/todas-mis-tiendas"
   }
-];
+  ];
 
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
     name: "Columnas Activas",
-    path: "/dashboard/",
+    path: "/dashboard/"
   }
 ];
 
