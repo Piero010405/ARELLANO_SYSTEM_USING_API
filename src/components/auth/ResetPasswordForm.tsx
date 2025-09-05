@@ -3,18 +3,13 @@ import Link from "next/link";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
-import { EyeCloseIcon, EyeIcon } from "@/icons";
 import React, { useState, FormEvent } from "react";
-import { useAuth } from "@/hooks/useAuth";
 import { useLoading } from "@/context/loading/LoadingContext";
 
-export default function SignInForm() {
-  const [showPassword, setShowPassword] = useState(false);
+export default function ResetPasswordForm() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);;
   const { show, hide } = useLoading();
-  const { login } = useAuth();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +17,7 @@ export default function SignInForm() {
 
     try {
       show();
-      await login(email, password);
+      
       window.location.href = "/dashboard"
     } catch (error) {
       console.error("Login error:", error);
@@ -40,21 +35,14 @@ export default function SignInForm() {
           
           <div className="mb-5 sm:mb-8">
             <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
-              Ingresar
+              ¿Olvidaste tu contraseña?
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Ingrese su email corporativo y contraseña para ingresar!
+              Ingrese la dirección de correo corporativo vinculada a su cuenta y le enviaremos un enlace para restablecer su contraseña.
             </p>
           </div>
 
           <div>
-            <div className="relative py-3 sm:py-5">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
-              </div>
-              <div className="relative flex justify-center text-sm mb-1">
-              </div>
-            </div>
 
             {error && <p className="text-red-500">{error}</p>}
 
@@ -66,42 +54,25 @@ export default function SignInForm() {
                   </Label>
                   <Input placeholder="Ingresar correo institucional" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
-                <div>
-                  <Label>
-                    Contraseña <span className="text-error-500">*</span>{" "}
-                  </Label>
-                  <div className="relative">
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Ingresar Contraseña"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <span
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
-                    >
-                      {showPassword ? (
-                        <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
-                      ) : (
-                        <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
-                      )}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <Link
-                    href="/restablecer-password"
-                    className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
-                  >
-                    Has olvidado tu contraseña? →
-                  </Link>
-                </div>
+                
                 <div>
                   <Button className="w-full" size="sm">
-                    Ingresar
+                    Solicitar Enlace de Reinicio
                   </Button>
                 </div>
+
+                <div className="flex items-center justify-start gap-x-3">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Ya recordaste tu contraseña...
+                    </p>
+                  <Link
+                    href="/login"
+                    className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
+                  >
+                    Regresar →
+                  </Link>
+                </div>
+
               </div>
             </form>
 
