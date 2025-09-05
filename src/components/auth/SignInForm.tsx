@@ -1,10 +1,10 @@
 "use client";
 // import Checkbox from "@/components/form/input/Checkbox";
+// import Link from "next/link";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
-import Link from "next/link";
+import { EyeCloseIcon, EyeIcon } from "@/icons";
 import React, { useState, FormEvent } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useLoading } from "@/context/loading/LoadingContext";
@@ -36,7 +36,7 @@ export default function SignInForm() {
 
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
-      <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
+      {/* <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
         <Link
           href="/"
           className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
@@ -44,7 +44,7 @@ export default function SignInForm() {
           <ChevronLeftIcon />
           Volver al Inicio
         </Link>
-      </div>
+      </div> */}
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           

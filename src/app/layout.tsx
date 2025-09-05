@@ -14,8 +14,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "ARELLANO - AUDITORIA",
-  description: "Sistema Interno de Auditoria - Arellano",
+  title: "Arellano - Auditoria",
+  description: "Sistema Interno del Área de Auditoria - Arellano",
   };
 
 export default function RootLayout({
