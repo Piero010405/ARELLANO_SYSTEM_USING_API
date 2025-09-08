@@ -1,7 +1,22 @@
 import { useAuth } from '@/hooks/useAuth';
+import { useLoading } from "@/context/loading/LoadingContext";
 
 export default function SidebarWidget() {
   const { logout } = useAuth();
+  const { show, hide } = useLoading();
+
+  const handleLogout = async () => {
+      try {
+        show();
+        await logout();
+        window.location.href = "/login";
+      } catch (error) {
+        console.error("Logout error:", error);
+      } finally {
+        hide();
+      }
+  };
+
   return (
     <div
       className={`
@@ -10,7 +25,7 @@ export default function SidebarWidget() {
       <button
         rel="nofollow"
         className="flex items-center justify-center p-3 font-medium text-white rounded-lg bg-brand-500 text-theme-sm hover:bg-brand-600 w-full"
-        onClick={logout} 
+        onClick={handleLogout} 
       >
         Cerrar Sesión
       </button>
