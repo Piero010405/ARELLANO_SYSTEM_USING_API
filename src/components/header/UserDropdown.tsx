@@ -4,13 +4,26 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 // import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { useState } from "react";
 import { useAuth } from '@/hooks/useAuth';
-import Link from "next/link";
 import { UserDropdownSkeleton } from "../arellano/skeletons";
+import { useLoading } from "@/context/loading/LoadingContext";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const { show, hide } = useLoading();
 
   const { user, logout, loading } = useAuth();
+
+  const handleLogout = async () => {
+      try {
+        show();
+        await logout();
+        window.location.href = "/login";
+      } catch (error) {
+        console.error("Logout error:", error);
+      } finally {
+        hide();
+      }
+  };
 
   function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
@@ -155,9 +168,8 @@ export default function UserDropdown() {
             </DropdownItem>
           </li>
         </ul> */}
-        <Link
-          href={"/login"}
-          onClick={logout}
+        <button
+          onClick={handleLogout}
           className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300 cursor-pointer"
         >
           <svg
@@ -176,7 +188,7 @@ export default function UserDropdown() {
             />
           </svg>
           Cerrar Sesión
-        </Link>
+        </button>
       </Dropdown>
     </div>
   );
