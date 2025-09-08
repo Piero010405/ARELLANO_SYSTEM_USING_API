@@ -15,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({
   pageSize,
   onPageChange,
 }) => {
-  const maxPageNumbers = 10; // Cuántos números de página se muestran a la vez
+  const maxPageNumbers = 6; // Cuántos números de página se muestran a la vez
   const pageGroup = Math.floor((currentPage - 1) / maxPageNumbers); // Grupo actual
 
   const startPage = pageGroup * maxPageNumbers + 1;
@@ -26,6 +26,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <p className="text-sm text-gray-500 dark:text-gray-400">
         Mostrando {Math.min(pageSize, totalEntries - (currentPage - 1) * pageSize)} de {totalEntries} tiendas
       </p>
+
       <div className="flex items-center justify-center gap-2 mt-4">
         {/* Botón para ir a la primera página */}
         <button
@@ -45,12 +46,13 @@ const Pagination: React.FC<PaginationProps> = ({
           {"<"}
         </button>
 
+        
         {/* Números de página */}
         {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
           <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={`w-8 h-8 rounded-full ${currentPage === page ? "bg-brand-500 text-white" : "text-gray-700 dark:text-gray-400 hover:bg-blue-500/[0.2]"}`}
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={`w-8 h-8 rounded-full ${currentPage === page ? "bg-brand-500 text-white" : "text-gray-700 dark:text-gray-400 hover:bg-blue-500/[0.2]"}`}
           >
             {page}
           </button>
