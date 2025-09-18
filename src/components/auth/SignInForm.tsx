@@ -89,6 +89,11 @@ export default function SignInForm() {
                     </span>
                   </div>
                 </div>
+                <div>
+                  <Button className="w-full" size="sm">
+                    Ingresar
+                  </Button>
+                </div>
                 <div className="flex items-center justify-between">
                   <Link
                     href="/restablecer-password"
@@ -96,11 +101,6 @@ export default function SignInForm() {
                   >
                     Has olvidado tu contraseña? →
                   </Link>
-                </div>
-                <div>
-                  <Button className="w-full" size="sm">
-                    Ingresar
-                  </Button>
                 </div>
               </div>
             </form>
