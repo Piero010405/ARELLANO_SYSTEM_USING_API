@@ -17,3 +17,12 @@ export interface AuthResponse {
   user: User;
   accessToken: string;
 }
+
+export interface RequestResetParams {
+  email: string;
+}
+
+export interface ResetPasswordParams {
+  token: Int16Array;
+  newPassword: string;
+}

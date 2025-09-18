@@ -1,6 +1,6 @@
 // src/services/api/authService.ts
 import axiosBackend  from "@/lib/api/client";
-import { LoginCredentials, AuthResponse } from "@/lib/types/auth";
+import { LoginCredentials, AuthResponse, RequestResetParams, ResetPasswordParams } from "@/lib/types/auth";
 import { API_ENDPOINTS } from "@/lib/api/endpoints";
 
 export const authService = {
@@ -47,5 +47,15 @@ export const authService = {
         } catch {
             return null;
         }
+    },
+
+    async requestResetPassword(params: RequestResetParams): Promise<void> {
+        const response = await axiosBackend.post(API_ENDPOINTS.AUTH.REQUEST_RESET, params);
+        return response.data;
+    },
+
+    async ResetPassword(params: ResetPasswordParams): Promise<void> {
+        const response = await axiosBackend.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, params);
+        return response.data;
     },
 };
