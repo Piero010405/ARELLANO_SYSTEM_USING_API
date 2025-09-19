@@ -26,3 +26,14 @@ export interface ResetPasswordParams {
   token: Int16Array;
   newPassword: string;
 }
+
+export interface RequestResetResponse {
+  success: boolean;
+  message?: string;
+  expiresAt?: string;
+}
+
+export interface ResetPasswordResponse {
+  success: boolean;
+  message: string;
+}
