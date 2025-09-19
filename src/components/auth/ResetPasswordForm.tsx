@@ -1,31 +1,63 @@
+// src/components/auth/ResetPasswordForm.tsx
 "use client";
 import Link from "next/link";
+import React, { useState, FormEvent } from "react";
+import { useLoading } from "@/context/loading/LoadingContext";
+import { useAuthResetApi } from "@/hooks/useAuthReset";
+import { showToast } from "nextjs-toast-notify";
+import TokenResetForm from "./TokenResetForm";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
-import React, { useState, FormEvent } from "react";
-import { useLoading } from "@/context/loading/LoadingContext";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ResetPasswordForm() {
+  const { requestReset } = useAuthResetApi();
+  const { show, hide } = useLoading();
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);;
-  const { show, hide } = useLoading();
 
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+  // Si request fue exitoso guardamos expiresAt y mostramos el paso 2
+  const [stepTwo, setStepTwo] = useState(false);
+  const [expiresAt, setExpiresAt] = useState<string | undefined>(undefined);
+  const [sentToEmail, setSentToEmail] = useState<string | null>(null);
+
+  const onSubmitRequest = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
+    // validación básica de email en cliente
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError("Ingrese un correo válido.");
+      return;
+    }
+
     try {
       show();
-      
-      window.location.href = "/dashboard"
-    } catch (error) {
-      console.error("Login error:", error);
-      setError("Credenciales incorrectas");
+      const result = await requestReset(email);
+
+      if (!result.success) {
+        setError(result.message || "No se pudo enviar el correo.");
+        return;
+      }
+
+      // Éxito
+      setSentToEmail(email);
+      setExpiresAt(result.expiresAt);
+      setStepTwo(true);
+
+      showToast.success("Se envió el código al correo.", {
+        duration: 4000,
+        position: "bottom-right",
+      });
+    } catch (err: any) {
+      const msg = err?.message || "Error al solicitar restablecimiento";
+      setError(msg);
     } finally {
       hide();
     }
   };
+
 
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
@@ -42,11 +74,12 @@ export default function ResetPasswordForm() {
             </p>
           </div>
 
+          {!stepTwo ? (
           <div>
 
             {error && <p className="text-red-500">{error}</p>}
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={onSubmitRequest}>
               <div className="space-y-6">
                 <div>
                   <Label>
@@ -57,7 +90,7 @@ export default function ResetPasswordForm() {
                 
                 <div>
                   <Button className="w-full" size="sm">
-                    Solicitar Enlace de Reinicio
+                    Solicitar Código de Reinicio
                   </Button>
                 </div>
 
@@ -77,6 +110,23 @@ export default function ResetPasswordForm() {
             </form>
 
           </div>
+        ) : (
+        // Paso 2: componente que maneja OTP + nueva password
+            <TokenResetForm
+              email={sentToEmail!}
+              expiresAt={expiresAt}
+              onSuccess={() => {
+                // redirigir al login al completar con éxito
+                showToast.success("Contraseña restablecida. Redirigiendo a login...", {
+                  duration: 2500,
+                  position: "bottom-right",
+                });
+                setTimeout(() => {
+                  window.location.href = "/login";
+                }, 1200);
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
