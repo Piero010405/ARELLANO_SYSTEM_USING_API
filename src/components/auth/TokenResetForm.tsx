@@ -133,7 +133,10 @@ export default function TokenResetForm({ email, expiresAt, onSuccess }: Props) {
           {Array.from({ length: 6 }).map((_, i) => (
             <input
               key={i}
-              ref={(el) => (inputsRef.current[i] = el)}
+              ref={(el) => { if (el) {
+                    inputsRef.current[i] = el;
+                    }
+                    }}
               type="text"
               inputMode="numeric"
               maxLength={1}
