@@ -16,12 +16,14 @@ export default function ArelanoDashboard() {
   
   return (
     <>
-      <div className="pb-9">
-        <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:items-end">
-          <h1 className="text-xl font-semibold text-gray-800 dark:text-white/90">
-            {user && <p>Bienvenido(a), {user.name} 👋</p>}
-          </h1>
-          <LastUpdateE2e />
+      <div className="pb-5">
+        <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:items-center gap-y-3">
+            <div>
+                <h1 className="text-xl font-semibold text-gray-800 dark:text-white/90">
+                    {user && <p>Bienvenido(a), {user.name} 👋</p>}
+                </h1>
+            </div>
+            <LastUpdateE2e />
         </div>
       </div>
 
