@@ -2,10 +2,13 @@
 
 import { useLastUpdateE2e } from "@/features/last-update/hooks";
 import LastUpdateBox from "./LastUpdateBox";
+import { LastUpdateBoxSkeleton } from "./skeletons";
 
 export default function LastUpdateE2e() {
   const { data: file, isLoading } = useLastUpdateE2e();
-  console.log("FILA:",file);
+  
+  if (isLoading) return <LastUpdateBoxSkeleton />;
+
   return (
     <LastUpdateBox file={file} />
   );

@@ -187,3 +187,14 @@ export function UserDropdownSkeleton() {
     </div>
   );
 }
+
+export function LastUpdateBoxSkeleton() {
+  return (
+    <div className="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-2xl dark:border-gray-800 dark:bg-gray-900 py-2 px-4 text-xs">
+      <div className="flex flex-col items-center justify-center space-y-2 animate-pulse-no-scale">
+        <div className="h-4 w-33 bg-gray-200 rounded dark:bg-gray-700 animate-pulse-no-scale" />
+        <div className="h-4 w-25 bg-gray-200 rounded dark:bg-gray-700 animate-pulse-no-scale" />
+      </div>
+    </div>
+  );
+}
