@@ -37,7 +37,7 @@ export interface Store {
 }
 
 export interface LastUpdateFile {
-    filename: string;
+    ARCHIVO: string;
     fecha_actual: Date;
     fecha: Date;
     hora: Int16Array,

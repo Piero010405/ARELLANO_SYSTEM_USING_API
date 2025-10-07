@@ -5,6 +5,7 @@ import StoreMetricsChart from "@/components/arellano/StoreMetricsChart";
 import StoreComplianceTarget from "@/components/arellano/StoreComplianceTarget";
 import StoresTablesFaltantes from "@/components/arellano/StoresTableFaltantes";
 import StoresTable from "@/components/arellano/StoresTable";
+import LastUpdateE2e from '@/components/arellano/LastUpdateE2E';
 
 export default function ArelanoDashboard() {
   const { user } = useAuth();
@@ -15,8 +16,13 @@ export default function ArelanoDashboard() {
   
   return (
     <>
-      <div className="pb-5">
-        <h1 className="text-xl font-semibold text-gray-800 dark:text-white/90">{user && <p>Bienvenido(a), {user.name} 👋</p>}</h1>
+      <div className="pb-9">
+        <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:items-end">
+          <h1 className="text-xl font-semibold text-gray-800 dark:text-white/90">
+            {user && <p>Bienvenido(a), {user.name} 👋</p>}
+          </h1>
+          <LastUpdateE2e />
+        </div>
       </div>
 
       <div className="grid grid-cols-12 gap-4 lg:gap-6">
