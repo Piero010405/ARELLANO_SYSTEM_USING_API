@@ -167,7 +167,7 @@ export default function AppHeader () {
             <ThemeToggleButton />
             {/* <!-- Dark Mode Toggler --> */}
 
-           <NotificationDropdown /> 
+            <NotificationDropdown /> 
             {/* <!-- Notification Menu Area --> */}
           </div>
           {/* <!-- User Area --> */}
