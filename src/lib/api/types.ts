@@ -35,3 +35,11 @@ export interface Store {
     NOMBRE_TIENDA: string;
     MES_CONTRATO: string;
 }
+
+export interface LastUpdateFile {
+    filename: string;
+    fecha_actual: Date;
+    fecha: Date;
+    hora: Int16Array,
+    minutos: Int16Array
+}

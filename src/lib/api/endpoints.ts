@@ -14,6 +14,9 @@ export const API_ENDPOINTS = {
     PROYECTADAS: '/api/stores/stores-proyectadas',
     BY_ID: (id: string) => `/api/stores/${id}`,
   },
+  LAST_UPDATE: {
+    E2E: '/api/last-update/e2e',
+  },
 } as const;
 
 export const INTERNAL_API_ENDPOINTS = {
@@ -32,4 +35,7 @@ export const INTERNAL_API_ENDPOINTS = {
     PROYECTADAS: '/api/stores/stores_proyectadas',
     BY_ID: (id: string | number) => `/api/stores/${id}`,
   },
+  LAST_UPDATE: {
+    E2E: '/api/last-update/e2e',
+  }
 } as const;
