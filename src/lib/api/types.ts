@@ -15,7 +15,7 @@ export interface Store {
     AS: string;
     NOMBRE_AUDITOR: string;
     CLUSTER: string;
-    TERRITORIO: string;
+    DEPARTAMENTO: string;
     PROVINCIA: string;
     DISTRITO: string;
     CANAL: string;
