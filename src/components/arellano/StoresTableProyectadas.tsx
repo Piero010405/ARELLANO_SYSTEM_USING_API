@@ -101,7 +101,7 @@ export default function StoresTablesProyectadas() {
                     isHeader
                     className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 px-3"
                     >
-                    Territorio
+                    Provincia
                   </TableCell>
                   <TableCell
                     isHeader
@@ -182,7 +182,7 @@ export default function StoresTablesProyectadas() {
                       {(store.COMENTARIO_OOEE == null ? store.COMENTARIO_DT : store.COMENTARIO_OOEE)}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      {store.TERRITORIO}
+                      {store.PROVINCIA}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
                       <BtnEditProyeccion  codigo={store.CODIGO} onEdit={handleEditClick}/>
