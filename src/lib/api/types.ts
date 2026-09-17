@@ -31,6 +31,7 @@ export interface Store {
     DT_PROYECTADO: string;
     DT_A_REPORTAR: string;
     RAZON_DT: string;
+    DETALLE_RAZON: string;
     COMENTARIO_DT: string;
     NOMBRE_TIENDA: string;
     MES_CONTRATO: string;
