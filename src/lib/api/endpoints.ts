@@ -33,6 +33,7 @@ export const INTERNAL_API_ENDPOINTS = {
     BASE: '/api/stores',
     FALTANTES: '/api/stores/stores_faltantes',
     PROYECTADAS: '/api/stores/stores_proyectadas',
+    EXPORT: '/api/stores/export',
     BY_ID: (id: string | number) => `/api/stores/${id}`,
   },
   LAST_UPDATE: {

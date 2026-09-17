@@ -22,3 +22,55 @@ export async function createProjection(dto: CreateProjectionDto): Promise<{ ok: 
     json: dto,
   });
 }
+
+export async function exportStoresExcel(): Promise<void> {
+  const response = await fetch(
+    INTERNAL_API_ENDPOINTS.STORES.EXPORT,
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    let message = "Error al exportar las tiendas";
+    try {
+      const data = await response.json();
+      message =
+        data.error ||
+        data.message ||
+        message;
+    } catch {
+      // response no JSON
+    }
+    throw new Error(message);
+  }
+
+  const blob = await response.blob();
+
+  const contentDisposition =
+    response.headers.get("Content-Disposition");
+
+  let fileName = "Arellano_Tiendas.xlsx";
+
+  const fileNameMatch =
+    contentDisposition?.match(
+      /filename="?([^"]+)"?/i
+    );
+
+  if (fileNameMatch?.[1]) {
+    fileName = fileNameMatch[1];
+  }
+
+  const url = window.URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+
+  anchor.href = url;
+  anchor.download = fileName;
+
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  window.URL.revokeObjectURL(url);
+}
