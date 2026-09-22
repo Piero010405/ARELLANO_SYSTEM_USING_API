@@ -9,32 +9,34 @@ export interface Metrics {
 }
 
 export interface Store {
-    PERIOD: string;
-    CODIGO: number;
-    AMP: string;
-    AS: string;
-    NOMBRE_AUDITOR: string;
-    CLUSTER: string;
-    DEPARTAMENTO: string;
-    PROVINCIA: string;
-    DISTRITO: string;
-    CANAL: string;
-    UBICACION: string;
-    STATUS_ACTUAL_EFECTIVO_E2E: string;
-    STATUS_PROYECTADO: string;
-    OOEE_A_REPORTAR: string;
-    RAZON_OOEE: string;
-    COMENTARIO_OOEE: string;
-    FECHA_DE_VISITA_PERIODO_ANTERIOR_E2E: string; // Date en formato string
-    FECHA_DE_VISITA_AJUSTADA_CALC: string; // Date en formato string
-    DIAS_TRANSCURRIDOS_EFECTIVOS: number;
-    DT_PROYECTADO: string;
-    DT_A_REPORTAR: string;
-    RAZON_DT: string;
-    DETALLE_RAZON: string;
-    COMENTARIO_DT: string;
-    NOMBRE_TIENDA: string;
-    MES_CONTRATO: string;
+    PERIOD_ID: number;
+    E2E_PERIOD_ID: string;
+    SMS_ID: number;
+    IS_AMP_STORE: string;
+    AS_NAME: string;
+    AUDITOR_NAME: string;
+    CLUSTER_NAME: string;
+    DEPARTMENT_NAME: string;
+    PROVINCE_NAME: string;
+    DISTRICT_NAME: string;
+    STORE_TYPE: string;
+    LOCATION: string;
+    STATUS_PREV: string;
+    STATUS_E2E: string;
+    STATUS_PROJECTED: string;
+    STATUS_REPORT: string;
+    PREV_VISIT_DATE: string;
+    ADJUSTED_VISIT_DATE: string;
+    EFFECTIVE_DAYS: number;
+    FUERA_DT_41_MAS: string;
+    DT_PROJECTED: string;
+    DT_REPORT: string;
+    REASON_TYPE: string;
+    REASON: string;
+    COMMENT: string;
+    REASON_DETAIL: string;
+    STORE_NAME: string;
+    CONTRACT_MONTH_NAME: string;
 }
 
 export interface LastUpdateFile {

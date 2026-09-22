@@ -63,7 +63,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
   useEffect(() => {
     if (searchQuery.trim().length > 0) {
       const filtered = allStores.filter((store) =>
-        String(store.CODIGO).toLowerCase().includes(searchQuery.toLowerCase())
+        String(store.SMS_ID).toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredStores(filtered);
       setCurrentPage(1); // reset paginación
@@ -165,36 +165,37 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
                 {paginatedStores.map((store, index) => (
                   <TableRow key={index}>
                      <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                        {store.CODIGO}
+                        {store.SMS_ID}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                        {store.AMP}
+                        {store.IS_AMP_STORE}
                     </TableCell>
                      <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                        {store.CLUSTER}
+                        {store.CLUSTER_NAME}
                     </TableCell>
                      <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                        {store.AS}
+                        {store.AS_NAME}
                     </TableCell>
                     <TableCell>
                       <Badge
                         size="sm"
                         color={
-                          store.OOEE_A_REPORTAR === "FULLAUDIT" ? "success" :
-                          store.OOEE_A_REPORTAR === "NOTAUDITED" ? "warning" :
-                          store.OOEE_A_REPORTAR === "0" ? "dark" :
-                          store.OOEE_A_REPORTAR === "CANS" ? "info" :
-                          store.OOEE_A_REPORTAR === "PARTIAL" ? "primary" : "error"
+                          store.STATUS_REPORT === "FULLAUDIT" ? "success" :
+                          store.STATUS_REPORT === "NOTAUDITED" ? "warning" :
+                          store.STATUS_REPORT === "UNKNOWN" ? "dark" :
+                          store.STATUS_REPORT === "CANS" ? "info" :
+                          store.STATUS_REPORT === "SRA" ? "info" :
+                          store.STATUS_REPORT === "PARTIAL" ? "primary" : "error"
                         }
                       >
-                        {store.OOEE_A_REPORTAR === '0' ? "UNKNOWN" : store.OOEE_A_REPORTAR}
+                        {store.STATUS_REPORT === '0' ? "UNKNOWN" : store.STATUS_REPORT}
                       </Badge>
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                        {store.RAZON_OOEE}
+                        {store.REASON}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      <BtnEditProyeccion codigo={store.CODIGO} onEdit={handleEditClick} />
+                      <BtnEditProyeccion codigo={store.SMS_ID} onEdit={handleEditClick} />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -214,7 +215,7 @@ export default function StoresTable({ pageSize = 10 }: StoresTableProps) {
         onPageChange={setCurrentPage} />
     )}
 
-    <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStore?.CODIGO ?? null} />
+    <ModalEditStore isOpen={isOpen} closeModal={closeModal} selectedStoreCode={selectedStore?.SMS_ID ?? null} />
     </div>
 
   );

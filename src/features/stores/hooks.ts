@@ -50,7 +50,7 @@ export function useCreateProjectionWithOptimism() {
       if (prevStores) {
         qc.setQueryData<Store[]>(
           storeKeys.missing(),
-          prevStores.filter(s => s.CODIGO !== dto.SMS_ID)
+          prevStores.filter(s => s.SMS_ID !== dto.SMS_ID)
         );
       }
 
