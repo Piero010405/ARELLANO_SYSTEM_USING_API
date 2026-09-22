@@ -29,7 +29,7 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
   useEffect(() => {
     if (query.length > 0) {
         const filtered = stores.filter((store) =>
-          String(store.CODIGO).includes(query.toLowerCase())
+          String(store.SMS_ID).includes(query.toLowerCase())
         );
         setFilteredStores(filtered);
         setShowSuggestions(true);
@@ -40,7 +40,7 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
   }, [query, stores]);
 
   const handleSelectStore = (store: Store) => {
-    setQuery(store.CODIGO.toString());
+    setQuery(store.SMS_ID.toString());
     setShowSuggestions(false);
     onStoreSelect(store); // Mandamos la tienda completa al padre
   };
@@ -48,7 +48,7 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const storeFound = stores.find(
-        (store) => store.CODIGO.toString().toLowerCase() === query.toLowerCase()
+        (store) => store.SMS_ID.toString().toLowerCase() === query.toLowerCase()
     );
     if (storeFound) {
       handleSelectStore(storeFound);
@@ -92,15 +92,15 @@ export default function StoreSearch ({ onStoreSelect }: StoreSearchProps) {
         <ScrollArea className="absolute z-20 w-full mt-1 max-h-60 rounded-md border dark:bg-dark-900 border-gray-300 bg-white text-gray-800 shadow-theme-xs dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
           {filteredStores.map((store) => (
             <div
-              key={store.CODIGO}
+              key={store.SMS_ID}
               className={cn(
                 "cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition",
                 "flex justify-between items-center"
               )}
               onClick={() => handleSelectStore(store)}
             >
-              <span>{store.CODIGO}</span>
-              <span className="text-xs text-gray-500">{store.NOMBRE_TIENDA}</span>
+              <span>{store.SMS_ID}</span>
+              <span className="text-xs text-gray-500">{store.STORE_NAME}</span>
             </div>
           ))}
         </ScrollArea>

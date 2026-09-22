@@ -47,9 +47,9 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
         if (!store) return;
 
         const payload = {
-            AS: store?.AS,
-            PERIOD: store?.PERIOD,
-            SMS_ID: store?.CODIGO,
+            AS: store?.AS_NAME,
+            PERIOD: store?.E2E_PERIOD_ID,
+            SMS_ID: store?.SMS_ID,
             STATUS_PROYECTADO: statusProyectar,
             RAZON: razon,
             COMENTARIO: comentario,
@@ -113,7 +113,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.CODIGO}
+                                            value={store.SMS_ID}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -125,7 +125,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.NOMBRE_TIENDA}
+                                            value={store.STORE_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparen px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-40   focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/1    dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/3  dark:focus:border-brand-800"
                                         />
@@ -139,7 +139,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.AS}
+                                            value={store.AS_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -151,7 +151,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.PROVINCIA}
+                                            value={store.PROVINCE_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                         />
@@ -165,7 +165,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.NOMBRE_AUDITOR}
+                                            value={store.AUDITOR_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -179,7 +179,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.MES_CONTRATO}
+                                            value={store.CONTRACT_MONTH_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -191,7 +191,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.DIAS_TRANSCURRIDOS_EFECTIVOS}
+                                            value={store.EFFECTIVE_DAYS}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -205,7 +205,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={store.STATUS_ACTUAL_EFECTIVO_E2E}
+                                            value={store.STATUS_E2E}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                         />
@@ -217,7 +217,7 @@ export default function ModalEditStore({ isOpen, closeModal, selectedStoreCode }
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={(store.OOEE_A_REPORTAR == '0' && store.DT_A_REPORTAR == 'FUERA DE DT' ? store.DT_A_REPORTAR : store.OOEE_A_REPORTAR)}
+                                            value={((store.STATUS_REPORT == 'UNKNOWN' || store.STATUS_REPORT == 'FULLAUDIT') && store.DT_REPORT == 'FUERA DE DT' ? store.DT_REPORT : store.STATUS_REPORT)}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-green-300 bg-transparent px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-green-400 dark:bg-gray-900 dark:placeholder:text-white/30 dark:focus:border-brand-800 text-green-400/90"
                                             />

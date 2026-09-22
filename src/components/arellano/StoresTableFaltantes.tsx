@@ -18,7 +18,7 @@ export default function StoresTablesFaltantes() {
 
   const filteredStores = useMemo(() => {
     const q = searchQuery.toLowerCase();
-    return stores.filter(s => String(s.CODIGO).toLowerCase().includes(q));
+    return stores.filter(s => String(s.SMS_ID).toLowerCase().includes(q));
   }, [searchQuery, stores]);
 
   const handleSearch = (q: string) => setSearchQuery(q);
@@ -110,65 +110,65 @@ export default function StoresTablesFaltantes() {
                 {filteredStores.map((store, index) => (
                   <TableRow key={index} className="">
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      {store.CODIGO}
+                      {store.SMS_ID}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      {store.AMP}
+                      {store.IS_AMP_STORE}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
                       <Badge
                         size="sm"
                         color={
-                          store.STATUS_ACTUAL_EFECTIVO_E2E === "FULLAUDIT"
+                          store.STATUS_E2E === "FULLAUDIT"
                           ? "success"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "NOTAUDITED"
+                          : store.STATUS_E2E === "NOTAUDITED"
                           ? "warning"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "UNKNOWN"
+                          : store.STATUS_E2E === "UNKNOWN"
                           ? "dark"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "CANS"
+                          : store.STATUS_E2E === "CANS"
                           ? "info"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "PARTIAL"
+                          : store.STATUS_E2E === "PARTIAL"
                           ? "primary"
                           : "error"
                         }
                         >
-                        {(store.STATUS_ACTUAL_EFECTIVO_E2E)}
+                        {(store.STATUS_E2E)}
                       </Badge>
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
                       <Badge
                           size="sm"
                           color={
-                            store.OOEE_A_REPORTAR === "FULLAUDIT"
+                            store.STATUS_REPORT === "FULLAUDIT"
                             ? "info"
-                            : store.OOEE_A_REPORTAR === "NOTAUDITED"
+                            : store.STATUS_REPORT === "NOTAUDITED"
                             ? "warning"
-                            : store.OOEE_A_REPORTAR === "UNKNOWN"
+                            : store.STATUS_REPORT === "UNKNOWN"
                             ? "dark"
-                            : store.OOEE_A_REPORTAR === "CANS"
+                            : store.STATUS_REPORT === "CANS"
                             ? "primary"
-                            : store.OOEE_A_REPORTAR === "CANCELLED"
+                            : store.STATUS_REPORT === "CANCELLED"
                             ? "error"
                             : "info"
                           }
                           >
-                          {(store.OOEE_A_REPORTAR == 'NOTAUDITED' || store.OOEE_A_REPORTAR == 'CANCELLED') ? store.OOEE_A_REPORTAR : store.DT_A_REPORTAR}
+                          {(store.STATUS_REPORT == 'NOTAUDITED' || store.STATUS_REPORT == 'CANCELLED') ? store.STATUS_REPORT : store.DT_REPORT}
                         </Badge>
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      {(store.RAZON_OOEE == null ? store.RAZON_DT : store.RAZON_OOEE)}
+                      {(store.REASON)}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      {store.CLUSTER}
+                      {store.CLUSTER_NAME}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      {store.AS}
+                      {store.AS_NAME}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      {store.PROVINCIA}
+                      {store.PROVINCE_NAME}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400">
-                      <BtnEditProyeccion  codigo={store.CODIGO} onEdit={handleEditClick}/>
+                      <BtnEditProyeccion  codigo={store.SMS_ID} onEdit={handleEditClick}/>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -14,32 +14,22 @@ export async function GET(req: NextRequest) {
   try {
     const { session } = await requireSession(req);
 
-    const stores = await storesService.getAllStores(
-      session.accessToken
-    );
-
+    const stores = await storesService.getAllStores(session.accessToken);
 
     if (!stores.length) {
       return NextResponse.json(
-        {
-          error: "No existen tiendas disponibles para exportar"
-        },
-        {
-          status: 404
-        }
+        { error: "No existen tiendas disponibles para exportar"},
+        { status: 404 }
       );
-
     }
-
 
     const workbook = new ExcelJS.Workbook();
 
     workbook.creator = "Arellano";
     workbook.created = new Date();
 
-
     const worksheet = workbook.addWorksheet(
-      "Tiendas",
+      "Stores",
       {
         properties: {
           tabColor: {
@@ -58,134 +48,145 @@ export async function GET(req: NextRequest) {
 
     worksheet.columns = [
       {
-        header: "PERIOD",
-        key: "PERIOD",
+        header: "PERIOD_ID",
+        key: "PERIOD_ID",
         width: 14
       },
       {
-        header: "CODIGO",
-        key: "CODIGO",
+        header: "E2E_PERIOD_ID",
+        key: "E2E_PERIOD_ID",
+        width: 14
+      },
+      {
+        header: "SMS_ID",
+        key: "SMS_ID",
         width: 16
       },
       {
-        header: "AMP",
-        key: "AMP",
+        header: "IS_AMP_STORE",
+        key: "IS_AMP_STORE",
         width: 10
       },
       {
-        header: "AS",
-        key: "AS",
+        header: "AS_NAME",
+        key: "AS_NAME",
         width: 25
       },
       {
-        header: "NOMBRE_AUDITOR",
-        key: "NOMBRE_AUDITOR",
+        header: "AUDITOR_NAME",
+        key: "AUDITOR_NAME",
         width: 30
       },
       {
-        header: "CLUSTER",
-        key: "CLUSTER",
+        header: "CLUSTER_NAME",
+        key: "CLUSTER_NAME",
         width: 25
       },
       {
-        header: "DEPARTAMENTO",
-        key: "DEPARTAMENTO",
+        header: "DEPARTMENT_NAME",
+        key: "DEPARTMENT_NAME",
         width: 20
       },
       {
-        header: "PROVINCIA",
-        key: "PROVINCIA",
+        header: "PROVINCE_NAME",
+        key: "PROVINCE_NAME",
         width: 20
       },
       {
-        header: "DISTRITO",
-        key: "DISTRITO",
+        header: "DISTRICT_NAME",
+        key: "DISTRICT_NAME",
         width: 20
       },
       {
-        header: "CANAL",
-        key: "CANAL",
+        header: "STORE_TYPE",
+        key: "STORE_TYPE",
         width: 24
       },
       {
-        header: "UBICACION",
-        key: "UBICACION",
+        header: "LOCATION",
+        key: "LOCATION",
         width: 35
       },
       {
-        header: "STATUS_ACTUAL_EFECTIVO_E2E",
-        key: "STATUS_ACTUAL_EFECTIVO_E2E",
-        width: 28
-      },
-      {
-        header: "STATUS_PROYECTADO",
-        key: "STATUS_PROYECTADO",
+        header: "STATUS_PREV",
+        key: "STATUS_PREV",
         width: 22
       },
       {
-        header: "OOEE_A_REPORTAR",
-        key: "OOEE_A_REPORTAR",
+        header: "STATUS_E2E",
+        key: "STATUS_E2E",
         width: 22
       },
       {
-        header: "RAZON_OOEE",
-        key: "RAZON_OOEE",
-        width: 30
+        header: "STATUS_PROJECTED",
+        key: "STATUS_PROJECTED",
+        width: 22
       },
       {
-        header: "COMENTARIO_OOEE",
-        key: "COMENTARIO_OOEE",
-        width: 40
+        header: "STATUS_REPORT",
+        key: "STATUS_REPORT",
+        width: 22
       },
       {
-        header: "FECHA_DE_VISITA_PERIODO_ANTERIOR_E2E",
-        key: "FECHA_DE_VISITA_PERIODO_ANTERIOR_E2E",
+        header: "PREV_VISIT_DATE",
+        key: "PREV_VISIT_DATE",
         width: 35
       },
       {
-        header: "FECHA_DE_VISITA_AJUSTADA_CALC",
-        key: "FECHA_DE_VISITA_AJUSTADA_CALC",
+        header: "ADJUSTED_VISIT_DATE",
+        key: "ADJUSTED_VISIT_DATE",
         width: 30
       },
       {
-        header: "DIAS_TRANSCURRIDOS_EFECTIVOS",
-        key: "DIAS_TRANSCURRIDOS_EFECTIVOS",
-        width: 28
+        header: "EFFECTIVE_DAYS",
+        key: "EFFECTIVE_DAYS",
+        width: 22
       },
       {
-        header: "DT_PROYECTADO",
-        key: "DT_PROYECTADO",
+        header: "FUERA_DT_41_MAS",
+        key: "FUERA_DT_41_MAS",
+        width: 22
+      },
+      {
+        header: "DT_PROJECTED",
+        key: "DT_PROJECTED",
         width: 20
       },
       {
-        header: "DT_A_REPORTAR",
-        key: "DT_A_REPORTAR",
+        header: "DT_REPORT",
+        key: "DT_REPORT",
         width: 20
       },
       {
-        header: "RAZON_DT",
-        key: "RAZON_DT",
+        header: "REASON_TYPE",
+        key: "REASON_TYPE",
+        width: 20
+      },
+
+      {
+        header: "REASON",
+        key: "REASON",
         width: 30
       },
       {
-        header: "COMENTARIO_DT",
-        key: "COMENTARIO_DT",
+        header: "COMMENT",
+        key: "COMMENT",
         width: 40
       },
       {
-        header: "DETALLE_RAZON",
-        key: "DETALLE_RAZON",
+        header: "REASON_DETAIL",
+        key: "REASON_DETAIL",
         width: 30
       },
       {
-        header: "NOMBRE_TIENDA",
-        key: "NOMBRE_TIENDA",
+        header: "STORE_NAME",
+        key: "STORE_NAME",
         width: 35
       },
       {
-        header: "MES_CONTRATO",
-        key: "MES_CONTRATO",
-        width: 20
+        header: "CONTRACT_MONTH_NAME",
+        key: "CONTRACT_MONTH_NAME",
+        width: 30
       },
     ];
 
@@ -197,7 +198,7 @@ export async function GET(req: NextRequest) {
     // ============================
     const headerRow = worksheet.getRow(1);
 
-    headerRow.height = 25;
+    headerRow.height = 15;
     headerRow.eachCell((cell) => {
       cell.font = {
         bold: true,
@@ -235,12 +236,12 @@ export async function GET(req: NextRequest) {
 
 
     // Mantener código sin notación científica
-    worksheet.getColumn("CODIGO").numFmt = "0";
+    worksheet.getColumn("SMS_ID").numFmt = "0";
 
     const buffer = await workbook.xlsx.writeBuffer();
 
     const period =
-      String(stores[0]?.PERIOD || "ACTUAL")
+      String(stores[0]?.PERIOD_ID || "ACTUAL")
         .replace(/[^\w-]/g, "");
 
     const fileName =

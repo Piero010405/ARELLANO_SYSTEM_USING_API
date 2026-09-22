@@ -35,9 +35,9 @@ export default function FormProyeccion() {
         e.preventDefault();
 
         const payload = {
-            AS: selectedStore?.AS,
-            PERIOD: selectedStore?.PERIOD,
-            SMS_ID: selectedStore?.CODIGO,
+            AS: selectedStore?.AS_NAME,
+            PERIOD: selectedStore?.E2E_PERIOD_ID,
+            SMS_ID: selectedStore?.SMS_ID,
             STATUS_PROYECTADO: statusProyectar,
             RAZON: razon,
             COMENTARIO: comentario,
@@ -122,7 +122,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.CODIGO}
+                                            value={selectedStore.SMS_ID}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -134,7 +134,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.NOMBRE_TIENDA}
+                                            value={selectedStore.STORE_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparen px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-40   focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/1    dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/3  dark:focus:border-brand-800"
                                         />
@@ -148,7 +148,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.AS}
+                                            value={selectedStore.AS_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -160,7 +160,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.PROVINCIA}
+                                            value={selectedStore.PROVINCE_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                         />
@@ -174,7 +174,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.NOMBRE_AUDITOR}
+                                            value={selectedStore.AUDITOR_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -188,7 +188,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.MES_CONTRATO}
+                                            value={selectedStore.CONTRACT_MONTH_NAME}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -200,7 +200,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.DIAS_TRANSCURRIDOS_EFECTIVOS}
+                                            value={selectedStore.EFFECTIVE_DAYS}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />
@@ -214,7 +214,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={selectedStore.STATUS_ACTUAL_EFECTIVO_E2E}
+                                            value={selectedStore.STATUS_E2E}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                         />
@@ -226,7 +226,7 @@ export default function FormProyeccion() {
                                         <input
                                             id="event-title"
                                             type="text"
-                                            value={(selectedStore.OOEE_A_REPORTAR == '0' && selectedStore.DT_A_REPORTAR == 'FUERA DE DT' ? selectedStore.DT_A_REPORTAR : selectedStore.OOEE_A_REPORTAR)}
+                                            value={((selectedStore.STATUS_REPORT == 'UNKNOWN' || selectedStore.STATUS_REPORT == 'FULLAUDIT') && selectedStore.DT_REPORT == 'FUERA DE DT' ? selectedStore.DT_REPORT : selectedStore.STATUS_REPORT)}
                                             readOnly
                                             className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                                             />

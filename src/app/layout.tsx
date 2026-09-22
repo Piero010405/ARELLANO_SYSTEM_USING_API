@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+// @ts-expect-error Next.js procesa los estilos globales sin declaraciones de TypeScript.
 import "./globals.css";
 
 import { SidebarProvider } from "@/context/sidebar/SidebarContext";

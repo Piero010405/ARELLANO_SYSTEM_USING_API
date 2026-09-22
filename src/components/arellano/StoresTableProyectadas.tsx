@@ -20,7 +20,7 @@ export default function StoresTablesProyectadas() {
 
   useEffect(() => {
     const filtered = stores.filter(store =>
-      String(store.CODIGO).includes(searchQuery.toLowerCase())
+      String(store.SMS_ID).includes(searchQuery.toLowerCase())
     );
     setFilteredStores(filtered);
   }, [searchQuery, stores]);
@@ -116,76 +116,76 @@ export default function StoresTablesProyectadas() {
                 {filteredStores.map((store, index) => (
                   <TableRow key={index} className="">
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      {store.CODIGO}
+                      {store.SMS_ID}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      {store.AS}
+                      {store.AS_NAME}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
                       <Badge
                         size="sm"
                         color={
-                          store.STATUS_ACTUAL_EFECTIVO_E2E === "FULLAUDIT"
+                          store.STATUS_E2E === "FULLAUDIT"
                           ? "success"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "NOTAUDITED"
+                          : store.STATUS_E2E === "NOTAUDITED"
                           ? "warning"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "UNKNOWN"
+                          : store.STATUS_E2E === "UNKNOWN"
                           ? "dark"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "CANS"
+                          : store.STATUS_E2E === "CANS"
                           ? "info"
-                          : store.STATUS_ACTUAL_EFECTIVO_E2E === "PARTIAL"
+                          : store.STATUS_E2E === "PARTIAL"
                           ? "primary"
                           : "error"
                         }
                         >
-                        {store.STATUS_ACTUAL_EFECTIVO_E2E}
+                        {store.STATUS_E2E}
                       </Badge>
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
                       <Badge
                         size="sm"
                         color={
-                          store.STATUS_PROYECTADO === "FULLAUDIT"
+                          store.STATUS_PROJECTED === "FULLAUDIT"
                           ? "success"
-                          : store.STATUS_PROYECTADO === "NOTAUDITED"
+                          : store.STATUS_PROJECTED === "NOTAUDITED"
                           ? "warning"
-                          : store.STATUS_PROYECTADO === "UNKNOWN"
+                          : store.STATUS_PROJECTED === "UNKNOWN"
                           ? "dark"
-                          : store.STATUS_PROYECTADO === "CANS"
+                          : store.STATUS_PROJECTED === "CANS"
                           ? "info"
-                          : store.STATUS_PROYECTADO === "PARTIAL"
+                          : store.STATUS_PROJECTED === "PARTIAL"
                           ? "primary"
-                          : store.STATUS_PROYECTADO === null
+                          : store.STATUS_PROJECTED === null
                           ? "dark"
                           : "error"
                         }
                         >
-                        {(store.STATUS_PROYECTADO == null ? '-' : store.STATUS_PROYECTADO)}
+                        {(store.STATUS_PROJECTED == null ? '-' : store.STATUS_PROJECTED)}
                       </Badge>
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
                       <Badge
                         size="sm"
                         color={
-                          store.DT_A_REPORTAR === "REGULAR"
+                          store.DT_REPORT === "REGULAR"
                           ? "success"
                           : "error"
                         }
                         >
-                        {(store.DT_A_REPORTAR)}
+                        {(store.DT_REPORT)}
                       </Badge>
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      {(store.RAZON_OOEE == null ? store.RAZON_DT : store.RAZON_OOEE)}
+                      {(store.REASON == null ? '-' : store.REASON)}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      {(store.COMENTARIO_OOEE == null ? store.COMENTARIO_DT : store.COMENTARIO_OOEE)}
+                      {(store.COMMENT == null ? '-' : store.COMMENT)}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      {store.PROVINCIA}
+                      {store.PROVINCE_NAME}
                     </TableCell>
                     <TableCell className="py-3 text-gray-500 text-theme-xs dark:text-gray-400 px-3">
-                      <BtnEditProyeccion  codigo={store.CODIGO} onEdit={handleEditClick}/>
+                      <BtnEditProyeccion  codigo={store.SMS_ID} onEdit={handleEditClick}/>
                     </TableCell>
                   </TableRow>
                 ))}
